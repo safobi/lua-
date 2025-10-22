@@ -37,4 +37,10 @@ function islandsN(isl)
 	return res
 end
 
+
+
+
+
+
+
 for i,v in ipairs(islandsN(grid)) do print (i,v) end
