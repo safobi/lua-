@@ -1,5 +1,10 @@
 
-function love.load()
+
+
+
+
+
+--[[function love.load()
 	canvas = love.graphics.newCanvas(600, 600)
  
 	-- Rectangle is drawn to the canvas with the regular alpha blend mode.
@@ -33,4 +38,4 @@ function love.draw()
 --	love.graphics.setBlendMode("alpha")
 --	love.graphics.setColor(1, 0, 0, 0.5)
 --	love.graphics.rectangle('fill', 200, 0, 100, 100)
-end
+end]]
