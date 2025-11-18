@@ -40,8 +40,8 @@ function cm.load()
 	tbs.tabs["Main"]=tab_info({img=cm.menu_img[1],x=500,y=80,sx=0.5,sy=0.5},"Main")
 	tbs.tabs["Side"]=tab_info({img=cm.menu_img[2],x=930,y=290,sx=0.5,sy=0.5,ox=40,oy=420},"Side")
 	for i=1,4,1 do
-		tbs.tabs["Main"]=tab_info({img=cm.menu_img[1],x=500,y=80,sx=0.5,sy=0.5},"Main")
-
+		tbs.tabs["Main"..i]=tab_info({img=cm.menu_img[4],x=500,y=80,sx=0.5,sy=0.5,ox=40,oy=45},"Main")
+		tbs.tabs["Side"..i]=tab_info({img=cm.menu_img[4],x=930,y=290,sx=0.5,sy=0.5,ox=40,oy=45},"Side")
 	end
 
 
