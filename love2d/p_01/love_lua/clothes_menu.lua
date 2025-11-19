@@ -22,15 +22,25 @@ function tab_info(data,i)
 end
 function position_inside_area(position,area)
 	local t_h,t_w=area.source:getHeight()/area.sy,area.source:getWidth()/area.sx
-	local x,y=position.x, position,y
+	local x,y=position.x, position.y
 	local x1,x2=area.x,area.x+t_w
 	local y1,y2=area.y,area.y+t_h
 	return (x1<x) and (x<x2) and (y1<y) and (y<y2)
 end
 
-
+function update_tabs(tab)
+	local mx,my=love.mouse.getX(),love.mouse.getY()
+	if position_inside_area({x=mx,y=my},tab) then
+		if love.mouse.isDown(1) then
+			tab["isActive"]=true
+		end
+	end
+end
 function tab_draw(tab_01)
-	if tab_01["isActive"] then
+	update_tabs(tab_01)
+	local name_tab_Side=string.match(tab_01.name,'tab_')
+	love.graphics.print(name_tab_Side)
+	if tab_01[name_tab_Side] and  tab_01["isActive"] then
 		love.graphics.setColor(0.1, 0.5, 0.3)
 	end
 	love.graphics.draw(tab_01.source, tab_01.x, tab_01.y, 0, tab_01.sx, tab_01.sy, tab_01.ox, tab_01.oy)
