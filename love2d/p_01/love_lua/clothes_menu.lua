@@ -1,6 +1,7 @@
 
 local cm={}
-
+local tbs={}
+tbs.tabs={}
 
  cm.menu_img={
  	love.graphics.newImage("Images/cube800x840.png"),
@@ -19,6 +20,13 @@ function tab_info(data,i)
 		}
 		return if_tabs
 end
+function position_inside_area(position,area)
+	local t_h,t_w=area.source:getHeight()/area.sy,area.source:getWidth()/area.sx
+	local x,y=position.x, position,y
+	local x1,x2=area.x,area.x+t_w
+	local y1,y2=area.y,area.y+t_h
+	return (x1<x) and (x<x2) and (y1<y) and (y<y2)
+end
 
 
 function tab_draw(tab_01)
@@ -29,24 +37,20 @@ function tab_draw(tab_01)
 	
 end
 
-function cm.load()
-	tbs={}
-	local tbs_c={
-		{x0=500,y0=80},
-		{x0=930,y0=290}
 
-	}
-	tbs.tabs={}
+function cm.load()
+	
 	tbs.tabs["Main"]=tab_info({img=cm.menu_img[1],x=500,y=80,sx=0.5,sy=0.5},"Main")
 	tbs.tabs["Side"]=tab_info({img=cm.menu_img[2],x=930,y=290,sx=0.5,sy=0.5,ox=40,oy=420},"Side")
-	local dx_1,dx_2=500,930
+	local dx_1,dx_2=540,100
 	for i=1,4,1 do
-		tbs.tabs["Main"..i]=tab_info({img=cm.menu_img[4],x=500,y=80,sx=0.5,sy=0.5,ox=40,oy=45},"Main")
-		tbs.tabs["Side"..i]=tab_info({img=cm.menu_img[4],x=930,y=290,sx=0.5,sy=0.5,ox=40,oy=45},"Side")
+		tbs.tabs["Main"..i]=tab_info({img=cm.menu_img[4],x=dx_1,y=100,sx=0.5,sy=0.5,ox=40,oy=45},"Main "..i)
+		tbs.tabs["Side"..i]=tab_info({img=cm.menu_img[4],x=930,y=dx_2,sx=0.5,sy=0.5,ox=40,oy=45},"Side "..i)
+		dx_1=dx_1+60
+		dx_2=dx_2+70
 	end
-
-
 end
+
 
 function cm.draw()
 	tab_draw(tbs.tabs["Main"])
@@ -55,6 +59,8 @@ function cm.draw()
 		tab_draw(tbs.tabs["Main"..i])
 		tab_draw(tbs.tabs["Side"..i])
 	end
+	--update_tab(tbs.tabs["Main"])
+	--love.graphics.print()
 end
 
 
