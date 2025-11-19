@@ -47,21 +47,29 @@ function update_tabs(tab)
 		elseif tbs.active==tab.name then
 			return
 		end
-			
-		
 	end
+end
+function main_draw()
+	
 end
 function tab_draw(tab_01)
 	update_tabs(tab_01)
 	local name_tab_Side=string.match(tab_01.name,'(Side_%d)$')
-
+	local name_tab_Main=string.match(tab_01.name,'(Main_%d)$')
 	--love.graphics.print(name_tab_Side)
 	if name_tab_Side and  tab_01["isActive"] then
 		love.graphics.print(name_tab_Side)
-		love.graphics.setColor(0.1, 0.5, 0.3)
+		if name_tab_Side=="Side_1" then
+			love.graphics.setColor(colors[1])
+		elseif name_tab_Side=="Side_2" then
+			love.graphics.setColor(colors[2])
+		elseif name_tab_Side=="Side_3" then
+			love.graphics.setColor(colors[3])
+		elseif name_tab_Side=="Side_4" then
+			love.graphics.setColor(colors[4])
+		end	
 	end
 	love.graphics.draw(tab_01.source, tab_01.x, tab_01.y, 0, tab_01.sx, tab_01.sy, tab_01.ox, tab_01.oy)
-	
 end
 
 
