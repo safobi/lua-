@@ -58,6 +58,7 @@ function main_draw(tab_01)
 		for i=1,4 do
 			love.graphics.draw(tab_01.source, tab_01.x, tab_01.y, 0, tab_01.sx, tab_01.sy, tab_01.ox, tab_01.oy)
 		end
+	end
 
 end
 function tab_draw(tab_01)
