@@ -49,8 +49,16 @@ function update_tabs(tab)
 		end
 	end
 end
-function main_draw()
-	
+function main_draw(tab_01)
+
+	love.graphics.draw(tab_01.source, tab_01.x, tab_01.y, 0, tab_01.sx, tab_01.sy, tab_01.ox, tab_01.oy)
+	local name_tab_Main=string.match(tab_01.name,'(Main_%d)$')
+
+	if  name_tab_Main then
+		for i=1,4 do
+			love.graphics.draw(tab_01.source, tab_01.x, tab_01.y, 0, tab_01.sx, tab_01.sy, tab_01.ox, tab_01.oy)
+		end
+
 end
 function tab_draw(tab_01)
 	update_tabs(tab_01)
@@ -61,6 +69,7 @@ function tab_draw(tab_01)
 		love.graphics.print(name_tab_Side)
 		if name_tab_Side=="Side_1" then
 			love.graphics.setColor(colors[1])
+			main_draw(tbs.tabs["Main"])
 		elseif name_tab_Side=="Side_2" then
 			love.graphics.setColor(colors[2])
 		elseif name_tab_Side=="Side_3" then
