@@ -1,0 +1,27 @@
+function draw_inborders(tab,area)
+	local res={}
+	local x_ox,y_oy=area.ox,area.oy
+	local gap_x,gap_y=tab.gap_x,tab.gap_y
+	local x_or,y_or=tab.origin_x,tab.origin_y
+	local x_th,y_th=tab.x_th,tab.y_th
+	local x_c,y_c=0,0
+	local check_x,check_y=0,0
+	function dfs(x,y,x1,y1)
+		if ((x+gap_x+(2*x_ox))>x_th) then 
+			print("exit") return end
+		if ((y+gap_y+(2*y_oy))>y_th)  then return end
+		x1=gap_x+x_ox+x
+		y1=gap_y+y_oy+y
+		y_c=gap_y+y_oy+y
+		x_c=gap_x+x_ox+x
+		res_t=table.unpack({x_c,y_c})
+		res[#res+1]={x1,y1}
+		dfs(x,y1+y_oy)
+		dfs(x1+x_ox,y)
+	end
+	dfs(x_or,y_or,0,0)
+	return res
+end
+local t=draw_inborders({gap_x=10,gap_y=10,origin_x=100,origin_y=90,x_th=800,y_th=550},{ox=70,oy=70})
+
+for i,v in ipairs(t) do print(i,v) end
