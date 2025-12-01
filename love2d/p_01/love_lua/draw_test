@@ -6,18 +6,20 @@ function draw_inborders(tab,area)
 	local x_th,y_th=tab.x_th,tab.y_th
 	local x_c,y_c=0,0
 	local check_x,check_y=0,0
-	function dfs(x,y,x1,y1)
-		if ((x+gap_x+(2*x_ox))>x_th) then 
-			print("exit") return end
+	local y_lol=false
+	function dfs(x,y)
+		if ((x+gap_x+(2*x_ox))>x_th) then return end
 		if ((y+gap_y+(2*y_oy))>y_th)  then return end
-		x1=gap_x+x_ox+x
-		y1=gap_y+y_oy+y
 		y_c=gap_y+y_oy+y
 		x_c=gap_x+x_ox+x
-		res_t=table.unpack({x_c,y_c})
-		res[#res+1]={x1,y1}
-		dfs(x,y1+y_oy)
-		dfs(x1+x_ox,y)
+		res[#res+1]={x_c,y_c}
+		 if y_lol==false then
+		dfs(x,gap_y+y_oy*2+y)
+		end
+		 y_lol=true
+		  print( "x " .. x.." y " .. y)
+		dfs(gap_x+x_ox*2+x,y)
+		y_lol=false
 	end
 	dfs(x_or,y_or,0,0)
 	return res
