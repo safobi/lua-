@@ -107,7 +107,7 @@ function update_cl(tab)
 				tab.isActive=true
 				vars.full_b=true
 			elseif vars.full~=tab.name then
-				tbs[vars.full].isActive=false
+				tbs.tabs[vars.full].isActive=false
 				vars.full=tab.name
 				tab.isActive=true
 				vars.full_b=true
@@ -124,7 +124,7 @@ function tab_mains:update_mains()
 			vars.tab_active_clothes=self.name
 			self.isActive=true
 		elseif vars.tab_active_clothes~=self.name then
-			tbs[vars.tab_active_clothes].isActive=false
+			tbs.tabs[vars.tab_active_clothes].isActive=false
 			vars.tab_active_clothes=self.name
 			self.isActive=true
 		elseif vars.tab_active_clothes==self.name then
@@ -132,7 +132,6 @@ function tab_mains:update_mains()
 		end
 	end
 end
-
 function draw_in_borders(tab,area)
 	local res={}
 	local x_ox,y_oy=area.ox,area.oy
@@ -140,28 +139,32 @@ function draw_in_borders(tab,area)
 	local x_or,y_or=tab.origin_x,tab.origin_y
 	local x_th,y_th=tab.x_th,tab.y_th
 	local x_c,y_c=0,0
+	local check_x,check_y=0,0
 	local y_lol=false
 	function dfs(x,y)
-		if ((x+gap_x+(2*x_ox))>x_th) or ((y+gap_y+(2*y_oy))>y_th) then return end
-		--if ((y+gap_y+(2*y_oy))>y_th)  then return end
+		if ((x-gap_x-(2*x_ox))<x_or) or ((y-gap_y-(2*y_oy))<y_or) then return end
 		if y_lol==false then
-			dfs(x,gap_y+y_oy*2+y)
+			dfs(x,y-gap_y-y_oy*2)
 		end
 		y_lol=true
-		y_c=gap_y+y_oy+y
-		x_c=gap_x+x_ox+x
-		res[#res+1]={x_c,y_c}
-		-- print( "x " .. x_c.." y " .. y_c)
-		 -- print( "x " .. x.." y " .. y)
-		dfs(gap_x+x_ox*2+x,y)
+		dfs(x-gap_x-x_ox*2,y)
 		y_lol=false
+		y_c=y-gap_y-y_oy
+		x_c=x-gap_x-x_ox
+		res[#res+1]={x_c,y_c}
+		--print( "x " .. x_c.." y " .. y_c)
 	end
-	dfs(x_or,y_or,0,0)
+	dfs(x_th,y_th)
 	return res
 end
 function tab_cl:draw_t()
 	update_cl(self)
 	love.graphics.draw(self.source, self.coord.x, self.coord.y, 0, self.coord.sx, self.coord.sy, self.coord.ox, self.coord.oy)
+end
+function tab_mains:draw()
+	self:update_mains()
+	love.graphics.draw(self.source, self.coord.x, self.coord.y, 0, self.coord.sx, self.coord.sy, self.coord.ox, self.coord.oy)
+
 end
 function draw_clothes_mod(tab,cl)
 	update_cl(tab)
@@ -169,7 +172,7 @@ function draw_clothes_mod(tab,cl)
 		love.graphics.draw(cl.source, cl.coord.x, cl.coord.y, 0, cl.coord.sx, cl.coord.sy, cl.coord.ox, cl.coord.oy)
 	end
 end
-local c=draw_in_borders({gap_x=5,gap_y=5,origin_x=480,origin_y=90,x_th=880,y_th=450},{ox=55,oy=55})
+local c=draw_in_borders({gap_x=10,gap_y=5,origin_x=480,origin_y=90,x_th=880,y_th=450},{ox=55,oy=55})
 
 function cm.load()
 	model_01=mc({img=cm.menu_img[5],x=270,y=255,sx=0.5,sy=0.5,ox=170,oy=490})
@@ -184,12 +187,11 @@ function cm.load()
 	bop_01=clothes({img=cm.menu_img[7],name="bot_01",x=275,y=260,sx=0.5,sy=0.5,ox=80.5,oy=112})
 	for i,v in ipairs(c) do
 		tbs.tabs["clothes_top"..i]=tab_cl({img=cm.menu_img[3],name="clothes_top"..tostring(i),x=c[i][1],
-		y=c[i][2],sx=0.5,sy=0.5,ox=40,oy=45,category="top",preview=cm.menu_img[6]})
-		print( "i "..i.." x " .. c[i][1].." y " .. c[i][2])
+		y=c[i][2],sx=0.5,sy=0.5,ox=110,oy=110,category="top",preview=cm.menu_img[6]})
 	end
-	for i=#c,1,-1 do
+	for i,v in ipairs(c) do
 		tbs.tabs["clothes_bot"..i]=tab_cl({img=cm.menu_img[3],name="clothes_bot"..i,x=c[i][1],
-		y=c[i][2],sx=0.5,sy=0.5,ox=40,oy=45,category="bot",preview=cm.menu_img[7]})
+		y=c[i][2],sx=0.5,sy=0.5,ox=110,oy=110,category="bot",preview=cm.menu_img[7]})
 	end
 end
 
@@ -200,9 +202,11 @@ function cm.draw()
 	tbs.tabs["clothes_tab_top"]:draw()
 	tbs.tabs["clothes_tab_bot"]:draw()
 	tbs.tabs["clothes_tab_full"]:draw()
+
 	for i=1,#c do
 		tbs.tabs["clothes_top"..i]:draw_t()
 	end
+
 	top_01:draw_c(tbs.tabs["clothes_top1"])
 end
 
