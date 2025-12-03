@@ -1,9 +1,9 @@
-local vars={}
+local vars={full_b=false,
+top,
+bot,
+full,
+tab_active_clothes
+}
 
-vars.full_b=false
-vars.top=""
-vars.bot=""
-vars.full=""
-vars.tab_active_clothes=""
 
 return vars

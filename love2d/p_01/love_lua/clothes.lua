@@ -9,8 +9,10 @@ function Clothes:new(data)
 	}
 end
 
-function Clothes:draw_c()
-	love.graphics.draw(self.source, self.coord.x, self.coord.y, 0, self.coord.sx, self.coord.sy, self.coord.ox, self.coord.oy)
+function Clothes:draw_c(tab)
+	if tab.isActive==true then
+		love.graphics.draw(self.source, self.coord.x, self.coord.y, 0, self.coord.sx, self.coord.sy, self.coord.ox, self.coord.oy)
+	end
 end
 
 

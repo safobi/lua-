@@ -8,22 +8,22 @@ function draw_inborders(tab,area)
 	local check_x,check_y=0,0
 	local y_lol=false
 	function dfs(x,y)
-		if ((x+gap_x+(2*x_ox))>x_th) or ((y+gap_y+(2*y_oy))>y_th) then return end
+		print( "x " .. x.." y " .. y)
+		if ((x-gap_x-(2*x_ox))<x_or) or ((y-gap_y-(2*y_oy))<y_or) then return end
 		--if ((y+gap_y+(2*y_oy))>y_th)  then return end
-
 		if y_lol==false then
-			dfs(x,gap_y+y_oy*2+y)
+			dfs(x,gap_y-y_oy*2-y)
 		end
-		y_c=gap_y+y_oy+y
-		x_c=gap_x+x_ox+x
+		y_c=gap_y-y_oy-y
+		x_c=gap_x-x_ox-x
 		res[#res+1]={x_c,y_c}
 		print( "x " .. x_c.." y " .. y_c)
 		 y_lol=true
 		--  print( "x " .. x.." y " .. y)
-		dfs(gap_x+x_ox*2+x,y)
+		dfs(gap_x-x_ox*2-x,y)
 		y_lol=false
 	end
-	dfs(x_or,y_or,0,0)
+	dfs(x_th,y_th)
 	return res
 end
 local t=draw_inborders({gap_x=5,gap_y=5,origin_x=480,origin_y=90,x_th=880,y_th=460},{ox=55,oy=55})

@@ -1,6 +1,7 @@
 local mc=require("love_lua.mc")
 local clothes=require("love_lua.clothes")
 local Object=require("libs.classic")
+local lume=require("libs.lume")
 local vars=require("love_lua.mc_vars")
 local cm={}
 local model_01,top_01,bot_01,full_01
@@ -63,8 +64,8 @@ end
  function position_inside_area(position,area)
 	local t_h,t_w=area.source:getHeight()*area.coord.sy,area.source:getWidth()*area.coord.sx
 	local x,y=position.x, position.y
-	local x1,x2=area.coord.x-(area.coord.ox*area.coord.sx or 0),area.coord.x+(area.coord.ox*area.coord.sx or 0)
-	local y1,y2=area.coord.y-(area.coord.oy*area.coord.sy or 0),area.coord.y+(area.coord.oy*area.coord.sy or 0)
+	local x1,x2=area.coord.x-(area.coord.ox*(area.coord.sx or 1)),area.coord.x+(area.coord.ox*(area.coord.sx or 1))
+	local y1,y2=area.coord.y-(area.coord.oy*(area.coord.sy or 1)),area.coord.y+(area.coord.oy*(area.coord.sy or 1))
 	return (x1<x) and (x<x2) and (y1<y) and (y<y2)
 end
 
@@ -78,7 +79,7 @@ function update_cl(tab)
 				tab.isActive=true
 				vars.full_b=false
 			elseif vars.top~=tab.name then
-				tbs[vars.top].isActive=false
+				tbs.tabs[vars.top].isActive=false
 				vars.top=tab.name
 				tab.isActive=true
 				vars.full_b=false
@@ -92,7 +93,7 @@ function update_cl(tab)
 				tab.isActive=true
 				vars.full_b=false
 			elseif vars.bot~=tab.name then
-				tbs[vars.bot].isActive=false
+				tbs.tabs[vars.bot].isActive=false
 				vars.bot=tab.name
 				tab.isActive=true
 				vars.full_b=false
@@ -158,23 +159,51 @@ function draw_in_borders(tab,area)
 	dfs(x_or,y_or,0,0)
 	return res
 end
+function tab_cl:draw_t()
+	update_cl(self)
+	love.graphics.draw(self.source, self.coord.x, self.coord.y, 0, self.coord.sx, self.coord.sy, self.coord.ox, self.coord.oy)
+end
+function draw_clothes_mod(tab,cl)
+	update_cl(tab)
+	if tab.isActive==true then
+		love.graphics.draw(cl.source, cl.coord.x, cl.coord.y, 0, cl.coord.sx, cl.coord.sy, cl.coord.ox, cl.coord.oy)
+	end
+end
 local c=draw_in_borders({gap_x=5,gap_y=5,origin_x=480,origin_y=90,x_th=880,y_th=450},{ox=55,oy=55})
 
 function cm.load()
 	model_01=mc({img=cm.menu_img[5],x=270,y=255,sx=0.5,sy=0.5,ox=170,oy=490})
 	tbs.tabs["clothes_window"]=tab_main({img=cm.menu_img[1],name="clothes_window",x=680,y=255,sx=0.5,sy=0.5,ox=400,oy=410})
+	tbs.tabs["clothes_tab_top"]=tab_mains({img=cm.menu_img[4],name="clothes_tab_top",category="top",
+	x=520,y=70,sx=0.5,sy=0.5,ox=40,oy=45})
+	tbs.tabs["clothes_tab_bot"]=tab_mains({img=cm.menu_img[4],name="clothes_tab_bot",category="bot",
+	x=580,y=70,sx=0.5,sy=0.5,ox=40,oy=45})
+	tbs.tabs["clothes_tab_full"]=tab_mains({img=cm.menu_img[4],name="clothes_tab_full",category="full",
+	x=640,y=70,sx=0.5,sy=0.5,ox=40,oy=45})
+	top_01=clothes({img=cm.menu_img[6],name="top_01",x=280,y=142,sx=0.5,sy=0.5,ox=60,oy=81})
+	bop_01=clothes({img=cm.menu_img[7],name="bot_01",x=275,y=260,sx=0.5,sy=0.5,ox=80.5,oy=112})
 	for i,v in ipairs(c) do
-		tbs.tabs["clothes_top"..i]=tab_cl({img=cm.menu_img[3],name="clothes_top"..i,x=c[i][1],
-		y=c[i][2],sx=0.5,sy=0.5,ox=60,oy=60,category="top",preview=cm.menu_img[6]})
+		tbs.tabs["clothes_top"..i]=tab_cl({img=cm.menu_img[3],name="clothes_top"..tostring(i),x=c[i][1],
+		y=c[i][2],sx=0.5,sy=0.5,ox=40,oy=45,category="top",preview=cm.menu_img[6]})
+		print( "i "..i.." x " .. c[i][1].." y " .. c[i][2])
+	end
+	for i=#c,1,-1 do
+		tbs.tabs["clothes_bot"..i]=tab_cl({img=cm.menu_img[3],name="clothes_bot"..i,x=c[i][1],
+		y=c[i][2],sx=0.5,sy=0.5,ox=40,oy=45,category="bot",preview=cm.menu_img[7]})
 	end
 end
+
 
 function cm.draw()
 	model_01:draw_mod()
 	tbs.tabs["clothes_window"]:draw()
+	tbs.tabs["clothes_tab_top"]:draw()
+	tbs.tabs["clothes_tab_bot"]:draw()
+	tbs.tabs["clothes_tab_full"]:draw()
 	for i=1,#c do
-		tbs.tabs["clothes_top"..i]:draw()
+		tbs.tabs["clothes_top"..i]:draw_t()
 	end
+	top_01:draw_c(tbs.tabs["clothes_top1"])
 end
 
 
