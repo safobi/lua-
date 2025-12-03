@@ -26,6 +26,6 @@ function draw_inborders(tab,area)
 	dfs(x_or,y_or,0,0)
 	return res
 end
-local t=draw_inborders({gap_x=10,gap_y=10,origin_x=100,origin_y=90,x_th=800,y_th=550},{ox=70,oy=70})
+local t=draw_inborders({gap_x=5,gap_y=5,origin_x=480,origin_y=90,x_th=880,y_th=460},{ox=55,oy=55})
 
 for i,v in ipairs(t) do print(i,v) end

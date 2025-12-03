@@ -6,7 +6,7 @@ local cm={}
 local model_01,top_01,bot_01,full_01
 local tbs={}
 tbs.tabs={}
-local tabs=Object:extend()
+local tabs_super=Object:extend()
 local colors={
 	{0.1, 0.5, 0.3},
 	{0.2,0.6,0.9},
@@ -25,7 +25,11 @@ local colors={
 
  }
 
-function tabs:new(data)
+local tab_cl=tabs_super:extend()
+local tab_mains=tabs_super:extend()
+local tab_main=tabs_super:extend()
+
+function tabs_super:new(data)
 	self.name=data.name
 	self.source=data.img
 	self.coord={
@@ -33,26 +37,26 @@ function tabs:new(data)
 	}
 end
 
-local tab_cl=tabs:extend()
-local tab_mains=tabs:extend()
-local tab_main=tabs:extend()
+
 function tab_cl:new(data)
-	tabs.super.new(self,data)
-	self.image=data.preview
+	tab_cl.super.new(self,data)
+	self.preview=data.preview
 	self.category=data.category
 	self.isActive=false
 end
-function tabs_mains:new(data)
-	tabs.super.new(self,data)
+
+function tab_mains:new(data)
+	tab_mains.super.new(self,data)
 	self.isActive=false
 	self.category=data.category
 end
 function tab_main:new(data)
-	tabs.super.new(self,data)
+	tab_main.super.new(self,data)
 	self.isDispalyed=false
 
 end
-function tabs:draw()
+
+function tabs_super:draw()
 	love.graphics.draw(self.source, self.coord.x, self.coord.y, 0, self.coord.sx, self.coord.sy, self.coord.ox, self.coord.oy)
 end
 
@@ -112,7 +116,7 @@ function update_cl(tab)
 		end
 	end
 end
-function tabs_mains:update_mains()
+function tab_mains:update_mains()
 	local mx,my=love.mouse.getX(),love.mouse.getY()
 	if position_inside_area({x=mx,y=my},self) and love.mouse.isDown(1) then
 		if vars.tab_active_clothes==nil then
@@ -154,18 +158,23 @@ function draw_in_borders(tab,area)
 	dfs(x_or,y_or,0,0)
 	return res
 end
-
-
-
+local c=draw_in_borders({gap_x=5,gap_y=5,origin_x=480,origin_y=90,x_th=880,y_th=450},{ox=55,oy=55})
 
 function cm.load()
-
-
+	model_01=mc({img=cm.menu_img[5],x=270,y=255,sx=0.5,sy=0.5,ox=170,oy=490})
+	tbs.tabs["clothes_window"]=tab_main({img=cm.menu_img[1],name="clothes_window",x=680,y=255,sx=0.5,sy=0.5,ox=400,oy=410})
+	for i,v in ipairs(c) do
+		tbs.tabs["clothes_top"..i]=tab_cl({img=cm.menu_img[3],name="clothes_top"..i,x=c[i][1],
+		y=c[i][2],sx=0.5,sy=0.5,ox=60,oy=60,category="top",preview=cm.menu_img[6]})
+	end
 end
 
 function cm.draw()
-
-
+	model_01:draw_mod()
+	tbs.tabs["clothes_window"]:draw()
+	for i=1,#c do
+		tbs.tabs["clothes_top"..i]:draw()
+	end
 end
 
 

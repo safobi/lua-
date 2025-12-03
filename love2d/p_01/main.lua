@@ -1,6 +1,6 @@
 
 
-local cm=require("love_lua.clothes_menu")
+local cm=require("love_lua.ui")
 
 	function love.load()
 		love.window.setMode(960, 510)
