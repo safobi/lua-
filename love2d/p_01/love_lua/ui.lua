@@ -5,9 +5,10 @@ local lume=require("libs.lume")
 local vars=require("love_lua.mc_vars")
 local cm={}
 local model_01,top_01,bot_01,full_01
-local tbs={}
-tbs.tabs={}
-local tabs_super=Object:extend()
+local tbs=require(("love_lua.tabs_table"))
+local tabs_super=require("love_lua.tab_super")
+local tab_cl=require("love_lua.tab_clothes")
+local f=require("love_lua.add_funct")
 local colors={
 	{0.1, 0.5, 0.3},
 	{0.2,0.6,0.9},
@@ -26,77 +27,66 @@ local colors={
 
  }
 
-local tab_cl=tabs_super:extend()
-local tab_mains=tabs_super:extend()
-local tab_main=tabs_super:extend()
-
-function tabs_super:new(data)
-	self.name=data.name
-	self.source=data.img
-	self.coord={
-	x=data.x, y=data.y,sx=data.sx,sy=data.sy,ox=data.ox,oy=data.oy
-	}
-end
+local tab_mains=require("love_lua.tab_mains")
+local tab_main=require("love_lua.tab_main")
 
 
-function tab_cl:new(data)
-	tab_cl.super.new(self,data)
-	self.preview=data.preview
-	self.category=data.category
-	self.isActive=false
-end
 
-function tab_mains:new(data)
-	tab_mains.super.new(self,data)
-	self.isActive=false
-	self.category=data.category
-end
-function tab_main:new(data)
-	tab_main.super.new(self,data)
-	self.isDispalyed=false
-end
-
-function tabs_super:draw()
-	love.graphics.draw(self.source, self.coord.x, self.coord.y, 0, self.coord.sx, self.coord.sy, self.coord.ox, self.coord.oy)
-end
-
- function position_inside_area(position,area)
-	local t_h,t_w=area.source:getHeight()*area.coord.sy,area.source:getWidth()*area.coord.sx
-	local x,y=position.x, position.y
-	local x1,x2=area.coord.x-(area.coord.ox*(area.coord.sx or 1)),area.coord.x+(area.coord.ox*(area.coord.sx or 1))
-	local y1,y2=area.coord.y-(area.coord.oy*(area.coord.sy or 1)),area.coord.y+(area.coord.oy*(area.coord.sy or 1))
-	return (x1<x) and (x<x2) and (y1<y) and (y<y2)
-end
 
 function update_cl(tab)
 	local cat=tab.category
 	local mx,my=love.mouse.getX(),love.mouse.getY()
-	if position_inside_area({x=mx,y=my},tab) and love.mouse.isDown(1) then
+	if f.position_inside_area({x=mx,y=my},tab) and love.mouse.isDown(1) then
 		if cat=="top" then
 			if vars.top==nil then
 				vars.top=tab.name
+				if tbs.tabs[vars.full] then
+					tbs.tabs[vars.full].isActive=false
+					vars.full=nil
+				end
 				tab.isActive=true
 				vars.full_b=false
 			elseif vars.top~=tab.name then
+				if tbs.tabs[vars.full] then
+					tbs.tabs[vars.full].isActive=false
+					vars.full=nil
+				end
 				tbs.tabs[vars.top].isActive=false
+
 				vars.top=tab.name
 				tab.isActive=true
 				vars.full_b=false
 			elseif vars.top==tab.name then
+				if tbs.tabs[vars.full] then
+					tbs.tabs[vars.full].isActive=false
+					vars.full=nil
+				end
 				return
 			end
 		end
 		if cat=="bot" then
 			if vars.bot==nil then
+				if tbs.tabs[vars.full] then
+					tbs.tabs[vars.full].isActive=false
+					vars.full=nil
+				end
 				vars.bot=tab.name
 				tab.isActive=true
 				vars.full_b=false
 			elseif vars.bot~=tab.name then
+				if tbs.tabs[vars.full] then
+					tbs.tabs[vars.full].isActive=false
+					vars.full=nil
+				end
 				tbs.tabs[vars.bot].isActive=false
 				vars.bot=tab.name
 				tab.isActive=true
 				vars.full_b=false
 			elseif vars.bot==tab.name then
+				if tbs.tabs[vars.full] then
+					tbs.tabs[vars.full].isActive=false
+					vars.full=nil
+				end
 				return
 			end
 		end
@@ -117,14 +107,24 @@ function update_cl(tab)
 				tbs.tabs[vars.full].isActive=false
 				if tbs.tabs[vars.bot] then
 					tbs.tabs[vars.bot].isActive=false
+					vars.bot=nil
 				end
 				if tbs.tabs[vars.top] then
 					tbs.tabs[vars.top].isActive=false
+					vars.top=nil
 				end
 				vars.full=tab.name
 				tab.isActive=true
 				vars.full_b=true
 			elseif vars.full==tab.name then
+				if tbs.tabs[vars.bot] then
+					tbs.tabs[vars.bot].isActive=false
+					vars.bot=nil
+				end
+				if tbs.tabs[vars.top] then
+					tbs.tabs[vars.top].isActive=false
+					vars.top=nil
+				end
 				return
 			end
 		end
@@ -135,60 +135,17 @@ function update_cl(tab)
 	if vars.top then
 		love.graphics.print(vars.top)
 	end
+	if vars.full then
+		love.graphics.print(vars.full)
+	end
 
 end
-function tab_mains:update_mains()
-	local mx,my=love.mouse.getX(),love.mouse.getY()
-	if position_inside_area({x=mx,y=my},self) and love.mouse.isDown(1) then
-		if vars.tab_active_clothes==nil then
-			vars.tab_active_clothes=self.name
-			self.isActive=true
-		elseif vars.tab_active_clothes~=self.name then
-			tbs.tabs[vars.tab_active_clothes].isActive=false
-			vars.tab_active_clothes=self.name
-			self.isActive=true
-		elseif vars.tab_active_clothes==self.name then
-			return
-		end
-	end
-end
-function draw_in_borders(tab,area)
-	local res={}
-	local x_ox,y_oy=area.ox,area.oy
-	local gap_x,gap_y=tab.gap_x,tab.gap_y
-	local x_or,y_or=tab.origin_x,tab.origin_y
-	local x_th,y_th=tab.x_th,tab.y_th
-	local x_c,y_c=0,0
-	local check_x,check_y=0,0
-	local y_lol=false
-	function dfs(x,y)
-		if ((x-gap_x-(2*x_ox))<x_or) or ((y-gap_y-(2*y_oy))<y_or) then return end
-		if y_lol==false then
-			dfs(x,y-gap_y-y_oy*2)
-		end
-		y_lol=true
-		dfs(x-gap_x-x_ox*2,y)
-		y_lol=false
-		y_c=y-gap_y-y_oy
-		x_c=x-gap_x-x_ox
-		res[#res+1]={x_c,y_c}
-		--print( "x " .. x_c.." y " .. y_c)
-	end
-	dfs(x_th,y_th)
-	return res
-end
-function tab_cl:draw(tab)
-	if self.category==tab.category and vars.tab_active_clothes==tab.name then
-		update_cl(self)
-		love.graphics.draw(self.source, self.coord.x, self.coord.y, 0, self.coord.sx, self.coord.sy, self.coord.ox, self.coord.oy)
-	end
-end
-function tab_mains:draw()
-	self:update_mains()
-	love.graphics.draw(self.source, self.coord.x, self.coord.y, 0, self.coord.sx, self.coord.sy, self.coord.ox, self.coord.oy)
-end
 
-local c=draw_in_borders({gap_x=15,gap_y=5,origin_x=480,origin_y=90,x_th=880,y_th=450},{ox=55,oy=55})
+
+
+
+
+local c=f.draw_in_borders({gap_x=15,gap_y=5,origin_x=480,origin_y=90,x_th=880,y_th=450},{ox=55,oy=55})
 
 function cm.load()
 	model_01=mc({img=cm.menu_img[5],x=270,y=255,sx=0.5,sy=0.5,ox=170,oy=490})
