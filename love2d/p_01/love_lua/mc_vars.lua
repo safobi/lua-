@@ -1,4 +1,4 @@
-local vars={full_b=false,
+local vars={full_b,
 top,
 bot,
 full,

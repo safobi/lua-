@@ -54,7 +54,6 @@ end
 function tab_main:new(data)
 	tab_main.super.new(self,data)
 	self.isDispalyed=false
-
 end
 
 function tabs_super:draw()
@@ -104,10 +103,24 @@ function update_cl(tab)
 		if cat=="full" then
 			if vars.full==nil then
 				vars.full=tab.name
+				if tbs.tabs[vars.bot] then
+					tbs.tabs[vars.bot].isActive=false
+					vars.bot=nil
+				end
+				if tbs.tabs[vars.top] then
+					tbs.tabs[vars.top].isActive=false
+					vars.top=nil
+				end
 				tab.isActive=true
 				vars.full_b=true
 			elseif vars.full~=tab.name then
 				tbs.tabs[vars.full].isActive=false
+				if tbs.tabs[vars.bot] then
+					tbs.tabs[vars.bot].isActive=false
+				end
+				if tbs.tabs[vars.top] then
+					tbs.tabs[vars.top].isActive=false
+				end
 				vars.full=tab.name
 				tab.isActive=true
 				vars.full_b=true
@@ -116,6 +129,13 @@ function update_cl(tab)
 			end
 		end
 	end
+	if vars.bot then
+		love.graphics.print(vars.bot)
+	end
+	if vars.top then
+		love.graphics.print(vars.top)
+	end
+
 end
 function tab_mains:update_mains()
 	local mx,my=love.mouse.getX(),love.mouse.getY()
@@ -157,22 +177,18 @@ function draw_in_borders(tab,area)
 	dfs(x_th,y_th)
 	return res
 end
-function tab_cl:draw_t()
-	update_cl(self)
-	love.graphics.draw(self.source, self.coord.x, self.coord.y, 0, self.coord.sx, self.coord.sy, self.coord.ox, self.coord.oy)
+function tab_cl:draw(tab)
+	if self.category==tab.category and vars.tab_active_clothes==tab.name then
+		update_cl(self)
+		love.graphics.draw(self.source, self.coord.x, self.coord.y, 0, self.coord.sx, self.coord.sy, self.coord.ox, self.coord.oy)
+	end
 end
 function tab_mains:draw()
 	self:update_mains()
 	love.graphics.draw(self.source, self.coord.x, self.coord.y, 0, self.coord.sx, self.coord.sy, self.coord.ox, self.coord.oy)
+end
 
-end
-function draw_clothes_mod(tab,cl)
-	update_cl(tab)
-	if tab.isActive==true then
-		love.graphics.draw(cl.source, cl.coord.x, cl.coord.y, 0, cl.coord.sx, cl.coord.sy, cl.coord.ox, cl.coord.oy)
-	end
-end
-local c=draw_in_borders({gap_x=10,gap_y=5,origin_x=480,origin_y=90,x_th=880,y_th=450},{ox=55,oy=55})
+local c=draw_in_borders({gap_x=15,gap_y=5,origin_x=480,origin_y=90,x_th=880,y_th=450},{ox=55,oy=55})
 
 function cm.load()
 	model_01=mc({img=cm.menu_img[5],x=270,y=255,sx=0.5,sy=0.5,ox=170,oy=490})
@@ -183,8 +199,8 @@ function cm.load()
 	x=580,y=70,sx=0.5,sy=0.5,ox=40,oy=45})
 	tbs.tabs["clothes_tab_full"]=tab_mains({img=cm.menu_img[4],name="clothes_tab_full",category="full",
 	x=640,y=70,sx=0.5,sy=0.5,ox=40,oy=45})
-	top_01=clothes({img=cm.menu_img[6],name="top_01",x=280,y=142,sx=0.5,sy=0.5,ox=60,oy=81})
-	bop_01=clothes({img=cm.menu_img[7],name="bot_01",x=275,y=260,sx=0.5,sy=0.5,ox=80.5,oy=112})
+	top_01=clothes({img=cm.menu_img[6],name="top_01",category="top",x=280,y=142,sx=0.5,sy=0.5,ox=60,oy=81})
+	bop_01=clothes({img=cm.menu_img[7],name="bot_01",category="bot",x=275,y=260,sx=0.5,sy=0.5,ox=80.5,oy=112})
 	for i,v in ipairs(c) do
 		tbs.tabs["clothes_top"..i]=tab_cl({img=cm.menu_img[3],name="clothes_top"..tostring(i),x=c[i][1],
 		y=c[i][2],sx=0.5,sy=0.5,ox=110,oy=110,category="top",preview=cm.menu_img[6]})
@@ -193,6 +209,10 @@ function cm.load()
 		tbs.tabs["clothes_bot"..i]=tab_cl({img=cm.menu_img[3],name="clothes_bot"..i,x=c[i][1],
 		y=c[i][2],sx=0.5,sy=0.5,ox=110,oy=110,category="bot",preview=cm.menu_img[7]})
 	end
+	tbs.tabs["clothes_full1"]=tab_cl({img=cm.menu_img[3],name="clothes_full1",x=c[1][1],
+		y=c[1][2],sx=0.5,sy=0.5,ox=110,oy=110,category="full",preview=cm.menu_img[7]})
+	tbs.tabs["clothes_full2"]=tab_cl({img=cm.menu_img[3],name="clothes_full1",x=c[2][1],
+		y=c[2][2],sx=0.5,sy=0.5,ox=110,oy=110,category="full",preview=cm.menu_img[7]})
 end
 
 
@@ -202,12 +222,16 @@ function cm.draw()
 	tbs.tabs["clothes_tab_top"]:draw()
 	tbs.tabs["clothes_tab_bot"]:draw()
 	tbs.tabs["clothes_tab_full"]:draw()
-
 	for i=1,#c do
-		tbs.tabs["clothes_top"..i]:draw_t()
+		tbs.tabs["clothes_top"..i]:draw(tbs.tabs["clothes_tab_top"])
 	end
-
+	tbs.tabs["clothes_bot1"]:draw(tbs.tabs["clothes_tab_bot"])
+	tbs.tabs["clothes_full1"]:draw(tbs.tabs["clothes_tab_full"])
+	tbs.tabs["clothes_full2"]:draw(tbs.tabs["clothes_tab_full"])
+	tbs.tabs["clothes_bot2"]:draw(tbs.tabs["clothes_tab_bot"])
 	top_01:draw_c(tbs.tabs["clothes_top1"])
+	bop_01:draw_c(tbs.tabs["clothes_bot1"])
+
 end
 
 
