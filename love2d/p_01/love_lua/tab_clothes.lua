@@ -2,7 +2,7 @@ local tabs_super=require("love_lua.tab_super")
 local vars=require("love_lua.mc_vars")
 local tab_cl=tabs_super:extend()
 local f=require("love_lua.add_funct")
-
+local tbs=require("love_lua.tabs_table")
 
 function tab_cl:new(data)
 	tab_cl.super.new(self,data)
@@ -11,9 +11,44 @@ function tab_cl:new(data)
 	self.isActive=false
 end
 
-function update_c1(tab)
-	local cat=tab.category
+function tab_cl:update_c1(cat,opt_c1,opt_c2)
 	local mx,my=love.mouse.getX(),love.mouse.getY()
+	if f.position_inside_area({x=mx,y=my},self) and love.mouse.isDown(1) then
+		if vars[cat]==nil then
+			if tbs.tabs[vars[opt_c1]] then
+				tbs.tabs[vars[opt_c1]].isActive=false
+				vars[opt_c1]=nil
+			end
+			if tbs.tabs[vars[opt_c2]] then
+				tbs.tabs[vars[opt_c2]].isActive=false
+				vars[opt_c2]=nil
+			end
+			vars[cat]=self.name
+			self.isActive=true
+		elseif vars[cat]~=self.name then
+			if tbs.tabs[vars[opt_c1]] then
+				tbs.tabs[vars[opt_c1]].isActive=false
+				vars[opt_c1]=nil
+			end
+			if tbs.tabs[vars[opt_c2]] then
+				tbs.tabs[vars[opt_c2]].isActive=false
+				vars[opt_c1]=nil
+			end
+			tbs.tabs[vars[cat]].isActive=false
+			vars[cat]=self.name
+			self.isActive=true
+		elseif vars[cat]==self.name then
+			if tbs.tabs[vars[opt_c1]] then
+				tbs.tabs[vars[opt_c1]].isActive=false
+				vars[opt_c1]=nil
+			end
+			if tbs.tabs[vars[opt_c2]] then
+				tbs.tabs[vars[opt_c2]].isActive=false
+				vars[opt_c2]=nil
+			end
+			return
+		end
+	end
 
 end
 function update_cl(tab)
@@ -22,11 +57,12 @@ function update_cl(tab)
 	if f.position_inside_area({x=mx,y=my},tab) and love.mouse.isDown(1) then
 		if cat=="top" then
 			if vars.top==nil then
-				vars.top=tab.name
+				
 				if tbs.tabs[vars.full] then
 					tbs.tabs[vars.full].isActive=false
 					vars.full=nil
 				end
+				vars.top=tab.name
 				tab.isActive=true
 				vars.full_b=false
 			elseif vars.top~=tab.name then
@@ -123,10 +159,17 @@ function update_cl(tab)
 	end
 
 end
+function preview_count()
 
+	
+end
 function tab_cl:draw(tab)
 	if self.category==tab.category and vars.tab_active_clothes==tab.name then
-		update_cl(self)
+		if self.category=="top" or self.category=="bot" then
+			self:update_c1(self.category,"full")
+		elseif self.category=="full" then
+			self:update_c1(self.category,"top","bot")
+		end
 		love.graphics.draw(self.source, self.coord.x, self.coord.y, 0, self.coord.sx, self.coord.sy, self.coord.ox, self.coord.oy)
 	end
 end
