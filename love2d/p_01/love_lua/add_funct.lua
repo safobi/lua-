@@ -47,4 +47,11 @@ function f.preview_count(tcl,tt)
 	
 end
 
+function f.pr(val)
+			local a
+			 if val then 
+			 	a=val  
+				else return nil end  
+				return a
+			end
 return f

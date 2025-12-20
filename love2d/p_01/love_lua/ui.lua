@@ -32,6 +32,13 @@ local colors={
 
 
 local c=f.draw_in_borders({gap_x=15,gap_y=5,origin_x=480,origin_y=90,x_th=880,y_th=450},{ox=55,oy=55})
+local pr=function(val)
+			local a
+			 if val then 
+			 	a=val  
+				else return nil end  
+				return a
+			end
 
 function cm.load()
 	model_01=mc({img=image.model.mod_01,x=270,y=255,sx=0.5,sy=0.5,ox=170,oy=490})
@@ -44,27 +51,20 @@ function cm.load()
 	x=640,y=70,sx=0.5,sy=0.5,ox=40,oy=45})
 	top_01=clothes({img=image.top.top_01,name="top_01",category="top",x=280,y=142,sx=0.5,sy=0.5,ox=60,oy=81})
 	bop_01=clothes({img=image.bot.bot_01,name="bot_01",category="bot",x=275,y=260,sx=0.5,sy=0.5,ox=80.5,oy=112})
-	local pr=function(val)
-			local a
-			 if val then 
-			 	a=val  
-				else return nil end  
-				return a
-			end
+	
 	for i,v in ipairs(c) do
 		
 		tbs.tabs["clothes_top"..i]=tab_cl({img=image.tabs.tab_03,name="clothes_top"..tostring(i),x=c[i][1],
-		y=c[i][2],sx=0.5,sy=0.5,ox=110,oy=110,category="top",preview})
+		y=c[i][2],sx=0.5,sy=0.5,ox=110,oy=110,category="top",  preview=pr(image.top["top_0"..i])})
 		if image.top["top_0"..i] then
 			local iii=pr(image.top["top_0"..i])
-			local ttt=iii:getHeight()
-			print(iii)
+			local ttt=tbs.tabs["clothes_top"..i].preview:getHeight()
+			print(ttt)
 		end
 	end
 	for i,v in ipairs(c) do
 		tbs.tabs["clothes_bot"..i]=tab_cl({img=image.tabs.tab_03,name="clothes_bot"..i,x=c[i][1],
-		y=c[i][2],sx=0.5,sy=0.5,ox=110,oy=110,category="bot",preview=function() if image.bot["bot_0"..i] then return image.bot["bot_0"..i]
-		else return nil end end })
+		y=c[i][2],sx=0.5,sy=0.5,ox=110,oy=110,category="bot",preview=pr(image.bot["bot_0"..i]) })
 	end
 	tbs.tabs["clothes_full1"]=tab_cl({img=image.tabs.tab_03,name="clothes_full1",x=c[1][1],
 		y=c[1][2],sx=0.5,sy=0.5,ox=110,oy=110,category="full",preview=cm.menu_img[7]})
