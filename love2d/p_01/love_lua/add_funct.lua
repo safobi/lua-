@@ -46,7 +46,7 @@ function f.preview_count(tcl,tt)
 	
 	
 end
-
+--dumb func redo later 
 function f.pr(val)
 			local a
 			 if val then 
