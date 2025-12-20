@@ -11,6 +11,7 @@ local tab_cl=require("love_lua.tab_clothes")
 local f=require("love_lua.add_funct")
 local tab_mains=require("love_lua.tab_mains")
 local tab_main=require("love_lua.tab_main")
+local image=require("love_lua.image_table")
 local colors={
 	{0.1, 0.5, 0.3},
 	{0.2,0.6,0.9},
@@ -30,40 +31,44 @@ local colors={
  }
 
 
-
-
-
-
-
-
-
-
-
-
 local c=f.draw_in_borders({gap_x=15,gap_y=5,origin_x=480,origin_y=90,x_th=880,y_th=450},{ox=55,oy=55})
 
 function cm.load()
-	model_01=mc({img=cm.menu_img[5],x=270,y=255,sx=0.5,sy=0.5,ox=170,oy=490})
-	tbs.tabs["clothes_window"]=tab_main({img=cm.menu_img[1],name="clothes_window",x=680,y=255,sx=0.5,sy=0.5,ox=400,oy=410})
-	tbs.tabs["clothes_tab_top"]=tab_mains({img=cm.menu_img[4],name="clothes_tab_top",category="top",
+	model_01=mc({img=image.model.mod_01,x=270,y=255,sx=0.5,sy=0.5,ox=170,oy=490})
+	tbs.tabs["clothes_window"]=tab_main({img=image.tabs.tab_01,name="clothes_window",x=680,y=255,sx=0.5,sy=0.5,ox=400,oy=410})
+	tbs.tabs["clothes_tab_top"]=tab_mains({img=image.tabs.tab_04,name="clothes_tab_top",category="top",
 	x=520,y=70,sx=0.5,sy=0.5,ox=40,oy=45})
-	tbs.tabs["clothes_tab_bot"]=tab_mains({img=cm.menu_img[4],name="clothes_tab_bot",category="bot",
+	tbs.tabs["clothes_tab_bot"]=tab_mains({img=image.tabs.tab_04,name="clothes_tab_bot",category="bot",
 	x=580,y=70,sx=0.5,sy=0.5,ox=40,oy=45})
-	tbs.tabs["clothes_tab_full"]=tab_mains({img=cm.menu_img[4],name="clothes_tab_full",category="full",
+	tbs.tabs["clothes_tab_full"]=tab_mains({img=image.tabs.tab_04,name="clothes_tab_full",category="full",
 	x=640,y=70,sx=0.5,sy=0.5,ox=40,oy=45})
-	top_01=clothes({img=cm.menu_img[6],name="top_01",category="top",x=280,y=142,sx=0.5,sy=0.5,ox=60,oy=81})
-	bop_01=clothes({img=cm.menu_img[7],name="bot_01",category="bot",x=275,y=260,sx=0.5,sy=0.5,ox=80.5,oy=112})
+	top_01=clothes({img=image.top.top_01,name="top_01",category="top",x=280,y=142,sx=0.5,sy=0.5,ox=60,oy=81})
+	bop_01=clothes({img=image.bot.bot_01,name="bot_01",category="bot",x=275,y=260,sx=0.5,sy=0.5,ox=80.5,oy=112})
+	local pr=function(val)
+			local a
+			 if val then 
+			 	a=val  
+				else return nil end  
+				return a
+			end
 	for i,v in ipairs(c) do
-		tbs.tabs["clothes_top"..i]=tab_cl({img=cm.menu_img[3],name="clothes_top"..tostring(i),x=c[i][1],
-		y=c[i][2],sx=0.5,sy=0.5,ox=110,oy=110,category="top",preview=cm.menu_img[6]})
+		
+		tbs.tabs["clothes_top"..i]=tab_cl({img=image.tabs.tab_03,name="clothes_top"..tostring(i),x=c[i][1],
+		y=c[i][2],sx=0.5,sy=0.5,ox=110,oy=110,category="top",preview})
+		if image.top["top_0"..i] then
+			local iii=pr(image.top["top_0"..i])
+			local ttt=iii:getHeight()
+			print(iii)
+		end
 	end
 	for i,v in ipairs(c) do
-		tbs.tabs["clothes_bot"..i]=tab_cl({img=cm.menu_img[3],name="clothes_bot"..i,x=c[i][1],
-		y=c[i][2],sx=0.5,sy=0.5,ox=110,oy=110,category="bot",preview=cm.menu_img[7]})
+		tbs.tabs["clothes_bot"..i]=tab_cl({img=image.tabs.tab_03,name="clothes_bot"..i,x=c[i][1],
+		y=c[i][2],sx=0.5,sy=0.5,ox=110,oy=110,category="bot",preview=function() if image.bot["bot_0"..i] then return image.bot["bot_0"..i]
+		else return nil end end })
 	end
-	tbs.tabs["clothes_full1"]=tab_cl({img=cm.menu_img[3],name="clothes_full1",x=c[1][1],
+	tbs.tabs["clothes_full1"]=tab_cl({img=image.tabs.tab_03,name="clothes_full1",x=c[1][1],
 		y=c[1][2],sx=0.5,sy=0.5,ox=110,oy=110,category="full",preview=cm.menu_img[7]})
-	tbs.tabs["clothes_full2"]=tab_cl({img=cm.menu_img[3],name="clothes_full1",x=c[2][1],
+	tbs.tabs["clothes_full2"]=tab_cl({img=image.tabs.tab_03,name="clothes_full1",x=c[2][1],
 		y=c[2][2],sx=0.5,sy=0.5,ox=110,oy=110,category="full",preview=cm.menu_img[7]})
 end
 

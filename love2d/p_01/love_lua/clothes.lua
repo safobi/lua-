@@ -1,6 +1,10 @@
 local Object=require("libs.classic")
 local Clothes=Object:extend()
 local vars=require("love_lua.mc_vars")
+local f=require("love_lua.add_funct")
+
+--clothes on model
+
 function Clothes:new(data)
 	--Clothes.super.new(self)
 	self.source=data.img

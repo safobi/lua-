@@ -34,4 +34,17 @@ function f.draw_in_borders(tab,area)
 	return res
 end
 
+--function for prewiew fit in clothes tab
+
+function f.preview_count(tcl,tt)
+	local tcl_im=tcl.source
+	local tt_im=tt.source
+	local tcl_x=tcl_im:getWidth()
+	local tcl_y=tcl_im:getHeight()
+	local tt_x=tt_im:getWidth()
+	local tt_y=tt_im:getHeight()
+	
+	
+end
+
 return f

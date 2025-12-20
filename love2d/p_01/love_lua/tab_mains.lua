@@ -3,6 +3,7 @@ local vars=require("love_lua.mc_vars")
 local tab_mains=tabs_super:extend()
 local tbs=require(("love_lua.tabs_table"))
 local f=require("love_lua.add_funct")
+--tab for clothes switching
 
 function tab_mains:new(data)
 	tab_mains.super.new(self,data)

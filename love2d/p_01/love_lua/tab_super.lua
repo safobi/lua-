@@ -2,6 +2,8 @@ local Object=require("libs.classic")
 local tabs_super=Object:extend()
 local f=require("love_lua.add_funct")
 
+
+
 function tabs_super:new(data)
 	self.name=data.name
 	self.source=data.img

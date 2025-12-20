@@ -3,6 +3,9 @@ local vars=require("love_lua.mc_vars")
 local tab_cl=tabs_super:extend()
 local f=require("love_lua.add_funct")
 local tbs=require("love_lua.tabs_table")
+local image=require("love_lua.image_table")
+
+--tabs for clothes display
 
 function tab_cl:new(data)
 	tab_cl.super.new(self,data)
@@ -51,6 +54,7 @@ function tab_cl:update_c1(cat,opt_c1,opt_c2)
 	end
 
 end
+--not used just reference
 function update_cl(tab)
 	local cat=tab.category
 	local mx,my=love.mouse.getX(),love.mouse.getY()
@@ -159,10 +163,8 @@ function update_cl(tab)
 	end
 
 end
-function preview_count()
 
-	
-end
+
 function tab_cl:draw(tab)
 	if self.category==tab.category and vars.tab_active_clothes==tab.name then
 		if self.category=="top" or self.category=="bot" then
