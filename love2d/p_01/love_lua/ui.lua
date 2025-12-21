@@ -47,10 +47,8 @@ function cm.load()
 	bop_01=clothes({img=image.bot.bot_01,name="bot_01",category="bot",x=275,y=260,sx=0.5,sy=0.5,ox=80.5,oy=112})
 	
 	for i,v in ipairs(c) do
-		
 		tbs.tabs["clothes_top"..i]=tab_cl({img=image.tabs.tab_03,name="clothes_top"..tostring(i),x=c[i][1],
 		y=c[i][2],sx=0.5,sy=0.5,ox=110,oy=110,category="top",  preview=f.pr(image.top["top_0"..i])})
-		
 	end
 	for i,v in ipairs(c) do
 		tbs.tabs["clothes_bot"..i]=tab_cl({img=image.tabs.tab_03,name="clothes_bot"..i,x=c[i][1],

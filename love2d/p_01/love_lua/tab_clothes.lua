@@ -173,6 +173,10 @@ function tab_cl:draw(tab)
 			self:update_c1(self.category,"top","bot")
 		end
 		love.graphics.draw(self.source, self.coord.x, self.coord.y, 0, self.coord.sx, self.coord.sy, self.coord.ox, self.coord.oy)
+		if self.preview then
+			love.graphics.draw(self.preview, self.coord.x, self.coord.y, 0, self.coord.sx, self.coord.sy, self.coord.ox, self.coord.oy)
+		end
+
 	end
 end
 
