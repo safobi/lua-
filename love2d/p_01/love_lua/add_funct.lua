@@ -34,7 +34,7 @@ function f.draw_in_borders(tab,area)
 	return res
 end
 
---function for prewiew fit in clothes tab
+--function for prewiew fit in clothes tab finish later???
 
 function f.preview_count(tcl,tt)
 	local tcl_im=tcl.source
@@ -48,10 +48,10 @@ function f.preview_count(tcl,tt)
 end
 --dumb func redo later 
 function f.pr(val)
-			local a
-			 if val then 
-			 	a=val  
-				else return nil end  
-				return a
-			end
+	local a
+	if val then 
+	 	a=val  
+	else return nil end  
+	return a
+end
 return f
