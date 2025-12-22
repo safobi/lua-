@@ -36,7 +36,7 @@ local c=f.draw_in_borders({gap_x=15,gap_y=5,origin_x=480,origin_y=90,x_th=880,y_
 
 function cm.load()
 	model_01=mc({img=image.model.mod_01,x=270,y=255,sx=0.5,sy=0.5,ox=170,oy=490})
-	tbs.tabs["clothes_window"]=tab_main({img=image.tabs.tab_01,name="clothes_window",x=680,y=255,sx=0.5,sy=0.5,ox=400,oy=410})
+	tbs.tabs["clothes_window"]=tab_main({img=image.tabs.tab_01,name="clothes_window",x=680,y=255,sx=0.5,sy=0.5,ox=400,oy=420,category="clothes"})
 	tbs.tabs["clothes_tab_top"]=tab_mains({img=image.tabs.tab_04,name="clothes_tab_top",category="top",
 	x=520,y=70,sx=0.5,sy=0.5,ox=40,oy=45})
 	tbs.tabs["clothes_tab_bot"]=tab_mains({img=image.tabs.tab_04,name="clothes_tab_bot",category="bot",
@@ -58,22 +58,34 @@ function cm.load()
 		y=c[1][2],sx=0.5,sy=0.5,ox=110,oy=110,category="full",preview=cm.menu_img[7]})
 	tbs.tabs["clothes_full2"]=tab_cl({img=image.tabs.tab_03,name="clothes_full1",x=c[2][1],
 		y=c[2][2],sx=0.5,sy=0.5,ox=110,oy=110,category="full",preview=cm.menu_img[7]})
+	tbs.tabs["menu_main"]=tab_main({img=image.tabs.tab_02,name="menu_main",x=920,y=255,sx=0.5,sy=0.5,ox=40,oy=420})
+	tbs.tabs["menu_clothes"]=tab_main({img=image.tabs.tab_04,name="menu_clothes",x=920,y=100,sx=0.5,sy=0.5,ox=40,oy=45,category="clothes"})
+	tbs.tabs["menu_model"]=tab_main({img=image.tabs.tab_04,name="menu_model",x=920,y=160,sx=0.5,sy=0.5,ox=40,oy=45,category="model"})
+	tbs.tabs["menu_journal"]=tab_main({img=image.tabs.tab_04,name="menu_journal",x=920,y=220,sx=0.5,sy=0.5,ox=40,oy=45,category="journal"})
+
+
 end
 
 
 function cm.draw()
 	model_01:draw_mod()
-	tbs.tabs["clothes_window"]:draw()
-	tbs.tabs["clothes_tab_top"]:draw()
-	tbs.tabs["clothes_tab_bot"]:draw()
-	tbs.tabs["clothes_tab_full"]:draw()
+	tbs.tabs["clothes_window"]:draw_u()
+	tbs.tabs["clothes_tab_top"]:draw(tbs.tabs["clothes_window"])
+	tbs.tabs["clothes_tab_bot"]:draw(tbs.tabs["clothes_window"])
+	tbs.tabs["clothes_tab_full"]:draw(tbs.tabs["clothes_window"])
+	tbs.tabs["menu_main"]:draw()
+	tbs.tabs["menu_clothes"]:draw_1(tbs.tabs["clothes_window"])
+	tbs.tabs["menu_model"]:draw_1(tbs.tabs["menu_model"])
+	tbs.tabs["menu_journal"]:draw_1(tbs.tabs["menu_journal"])
+
+
 	for i=1,#c do
-		tbs.tabs["clothes_top"..i]:draw(tbs.tabs["clothes_tab_top"])
+		tbs.tabs["clothes_top"..i]:draw(tbs.tabs["clothes_tab_top"],tbs.tabs["clothes_window"])
 	end
-	tbs.tabs["clothes_bot1"]:draw(tbs.tabs["clothes_tab_bot"])
-	tbs.tabs["clothes_full1"]:draw(tbs.tabs["clothes_tab_full"])
-	tbs.tabs["clothes_full2"]:draw(tbs.tabs["clothes_tab_full"])
-	tbs.tabs["clothes_bot2"]:draw(tbs.tabs["clothes_tab_bot"])
+	tbs.tabs["clothes_bot1"]:draw(tbs.tabs["clothes_tab_bot"],tbs.tabs["clothes_window"])
+	tbs.tabs["clothes_full1"]:draw(tbs.tabs["clothes_tab_full"],tbs.tabs["clothes_window"])
+	tbs.tabs["clothes_full2"]:draw(tbs.tabs["clothes_tab_full"],tbs.tabs["clothes_window"])
+	tbs.tabs["clothes_bot2"]:draw(tbs.tabs["clothes_tab_bot"],tbs.tabs["clothes_window"])
 	top_01:draw_c(tbs.tabs["clothes_top1"])
 	bop_01:draw_c(tbs.tabs["clothes_bot1"])
 

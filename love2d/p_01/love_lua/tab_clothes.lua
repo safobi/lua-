@@ -165,18 +165,22 @@ function update_cl(tab)
 end
 
 
-function tab_cl:draw(tab)
-	if self.category==tab.category and vars.tab_active_clothes==tab.name then
-		if self.category=="top" or self.category=="bot" then
-			self:update_c1(self.category,"full")
-		elseif self.category=="full" then
-			self:update_c1(self.category,"top","bot")
-		end
-		love.graphics.draw(self.source, self.coord.x, self.coord.y, 0, self.coord.sx, self.coord.sy, self.coord.ox, self.coord.oy)
-		if self.preview then
-			love.graphics.draw(self.preview, self.coord.x, self.coord.y, 0, self.coord.sx, self.coord.sy, self.coord.ox, self.coord.oy)
-		end
+function tab_cl:draw(tab,tab2)
+	if tab2.isDispalyed==true then
+		if self.category==tab.category and vars.tab_active_clothes==tab.name then
+			if self.category=="top" or self.category=="bot" then
+				self:update_c1(self.category,"full")
+			elseif self.category=="full" then
+				self:update_c1(self.category,"top","bot")
+			end
 
+			love.graphics.draw(self.source, self.coord.x, self.coord.y, 0, self.coord.sx, self.coord.sy, self.coord.ox, self.coord.oy)
+
+			if self.preview then
+				love.graphics.draw(self.preview, self.coord.x, self.coord.y, 0, self.coord.sx, self.coord.sy, self.coord.ox, self.coord.oy)
+			end
+
+		end
 	end
 end
 

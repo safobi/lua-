@@ -27,9 +27,11 @@ function tab_mains:update_mains()
 	end
 end
 
-function tab_mains:draw()
-	self:update_mains()
-	love.graphics.draw(self.source, self.coord.x, self.coord.y, 0, self.coord.sx, self.coord.sy, self.coord.ox, self.coord.oy)
+function tab_mains:draw(tab)
+	if tab.isDispalyed then 
+		self:update_mains()
+		love.graphics.draw(self.source, self.coord.x, self.coord.y, 0, self.coord.sx, self.coord.sy, self.coord.ox, self.coord.oy)
+	end
 end
 
 
