@@ -18,37 +18,19 @@ function tab_cl:update_c1(cat,opt_c1,opt_c2)
 	local mx,my=love.mouse.getX(),love.mouse.getY()
 	if f.position_inside_area({x=mx,y=my},self) and love.mouse.isDown(1) then
 		if vars[cat]==nil then
-			if tbs.tabs[vars[opt_c1]] then
-				tbs.tabs[vars[opt_c1]].isActive=false
-				vars[opt_c1]=nil
-			end
-			if tbs.tabs[vars[opt_c2]] then
-				tbs.tabs[vars[opt_c2]].isActive=false
-				vars[opt_c2]=nil
-			end
+			shoto(opt_c1)
+			shoto(opt_c2)
 			vars[cat]=self.name
 			self.isActive=true
 		elseif vars[cat]~=self.name then
-			if tbs.tabs[vars[opt_c1]] then
-				tbs.tabs[vars[opt_c1]].isActive=false
-				vars[opt_c1]=nil
-			end
-			if tbs.tabs[vars[opt_c2]] then
-				tbs.tabs[vars[opt_c2]].isActive=false
-				vars[opt_c1]=nil
-			end
+			shoto(opt_c1)
+			shoto(opt_c2)
 			tbs.tabs[vars[cat]].isActive=false
 			vars[cat]=self.name
 			self.isActive=true
 		elseif vars[cat]==self.name then
-			if tbs.tabs[vars[opt_c1]] then
-				tbs.tabs[vars[opt_c1]].isActive=false
-				vars[opt_c1]=nil
-			end
-			if tbs.tabs[vars[opt_c2]] then
-				tbs.tabs[vars[opt_c2]].isActive=false
-				vars[opt_c2]=nil
-			end
+			shoto(opt_c1)
+			shoto(opt_c2)
 			return
 		end
 	end
@@ -164,6 +146,12 @@ function update_cl(tab)
 
 end
 
+function shoto(opt_cx)
+	 if tbs.tabs[vars[opt_cx]] then
+			tbs.tabs[vars[opt_cx]].isActive=false
+			vars[opt_cx]=nil
+	end
+end
 
 function tab_cl:draw(tab,tab2)
 	if tab2.isDispalyed==true then
