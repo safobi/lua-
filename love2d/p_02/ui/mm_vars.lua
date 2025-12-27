@@ -1,6 +1,7 @@
 local mm_vars={
 
-	hovered_button
+	hovered_button,
+	active_menu
 
 
 }

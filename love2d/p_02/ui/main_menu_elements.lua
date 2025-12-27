@@ -1,7 +1,7 @@
 
 local elements={
 
-	b_start={
+	{
 		name="b_start",
 		text="Start",
 		pos_x=0.2,
@@ -10,7 +10,7 @@ local elements={
 		
 	},
 
-	b_settings={
+	{
 
 		name="b_settings",
 		text="Settings",
@@ -19,7 +19,7 @@ local elements={
 		isHovered=false
 	},
 
-	b_exit={
+	{
 		name="b_exit",
 		text="Exit",
 		pos_x=0.2,
