@@ -10,7 +10,10 @@ function util.position_inside_area(position,button)
 	local x1,x2=button.pos_x*win_x-((textWidth/2)),button.pos_x*win_x+((textWidth/2))
 	local y1,y2=button.pos_y*win_y-(textHeight/2),button.pos_y*win_y+(textHeight/2)
 	return (x1<x) and (x<x2) and (y1<y) and (y<y2)
+end
 
+function util.isKey_used()
+	
 end
 
 function util.drawCenteredText(rectX, rectY, rectWidth, rectHeight, text)

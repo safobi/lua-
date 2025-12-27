@@ -26,13 +26,8 @@ function mm.draw()
 			util.draw_text_menu(elm[k],colors[1])
 		else
 		    util.draw_text_menu(elm[k],colors[3])
-		end
-		
-		
+		end		
 	end
-
-
-
 end
 
 
