@@ -27,14 +27,17 @@ function util.hovered(button)
 	end
 end
 
+function util.hovered_check()
+	
+end
 
 
-function util.draw_text_menu(text,x,y)
+function util.draw_text_menu(button,color)
 	local win_x,win_y=love.graphics.getDimensions()
 	local font=love.graphics.getFont()
-	local textWidth  = font:getWidth(text)
+	local textWidth  = font:getWidth(button.text)
 	local textHeight = font:getHeight()
-	love.graphics.print(text, x*win_x, y*win_y, 0, 1, 1, textWidth/2, textHeight/2)
+	love.graphics.print({color,button.text}, button.pos_x*win_x, button.pos_y*win_y, 0, 1, 1, textWidth/2, textHeight/2)
 end
 
 return util

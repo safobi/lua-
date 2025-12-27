@@ -21,10 +21,21 @@ end
 function mm.draw()
 	love.graphics.setFont(mm.font1)
 	for k,v in pairs(elm) do
-		util.draw_text_menu(elm[k].text,elm[k].pos_x,elm[k].pos_y)
 		util.hovered(elm[k])
-		if elm[k].isHovered==true then
-			love.graphics.setColor(r, g, b, a)
+		if mm_v.hovered_button==nil and elm[k].isHovered==true then
+			util.draw_text_menu(elm[k],colors[2])
+			mm_v.hovered_button=elm[k].name
+		elseif mm_v.hovered_button~=elm[k].name and elm[k].isHovered then
+			elm[mm_v.hovered_button].isHovered=false
+			util.draw_text_menu(elm[k],colors[3])
+			mm_v.hovered_button=elm[k].name
+		elseif not elm[k].isHovered then
+			util.draw_text_menu(elm[k],colors[4])
+		elseif mm_v.hovered_button==elm[k].name and elm[k].isHovered then
+		util.draw_text_menu(elm[k],colors[2]) 
+			return
+			
+		end
 	end
 
 
