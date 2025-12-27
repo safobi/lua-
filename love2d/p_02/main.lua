@@ -12,6 +12,11 @@ function love.draw()
 	mm.draw()
 end
 
+function love.update()
+	
+
+
+end
 
 function love.keypressed(key)
 	if key=="escape" then

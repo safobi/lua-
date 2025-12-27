@@ -5,7 +5,8 @@ local elements={
 		name="start",
 		text="Start",
 		pos_x=0.2,
-		pos_y=0.3
+		pos_y=0.3,
+		isHovered=false
 		
 	},
 
@@ -14,14 +15,16 @@ local elements={
 		name="settings",
 		text="Settings",
 		pos_x=0.2,
-		pos_y=0.55
+		pos_y=0.55,
+		isHovered=false
 	},
 
 	b_exit={
 		name="exit",
 		text="Exit",
 		pos_x=0.2,
-		pos_y=0.8
+		pos_y=0.8,
+		isHovered=false
 
 	}
 

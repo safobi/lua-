@@ -1,4 +1,17 @@
+local f=require("libs.util")
 local util={}
+
+function util.position_inside_area(position,button)
+	local x,y=position.x, position.y
+	local win_x,win_y=love.graphics.getDimensions()
+	local font=love.graphics.getFont()
+	local textWidth  = font:getWidth(button.text)
+	local textHeight = font:getHeight()
+	local x1,x2=button.pos_x*win_x-((textWidth/2)),button.pos_x*win_x+((textWidth/2))
+	local y1,y2=button.pos_y*win_y-(textHeight/2),button.pos_y*win_y+(textHeight/2)
+	return (x1<x) and (x<x2) and (y1<y) and (y<y2)
+
+end
 
 function util.drawCenteredText(rectX, rectY, rectWidth, rectHeight, text)
 	local font       = love.graphics.getFont()
@@ -7,9 +20,13 @@ function util.drawCenteredText(rectX, rectY, rectWidth, rectHeight, text)
 	love.graphics.print(text, rectX+rectWidth/2, rectY+rectHeight/2, 0, 1, 1, textWidth/2, textHeight/2)
 end
 
-function util.set_pos()
-	
+function util.hovered(button)
+	local mx,my=love.mouse.getX(),love.mouse.getY()
+	if util.position_inside_area({x=mx,y=my},button) then
+		button.isHovered=true
+	end
 end
+
 
 
 function util.draw_text_menu(text,x,y)
