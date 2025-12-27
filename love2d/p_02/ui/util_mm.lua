@@ -12,8 +12,10 @@ function util.position_inside_area(position,button)
 	return (x1<x) and (x<x2) and (y1<y) and (y<y2)
 end
 
-function util.isKey_used()
-	
+function util.isKey_used(button)
+	local up=love.keypressed("w", w)
+	local down=love.keypressed("s", s)
+
 end
 
 function util.drawCenteredText(rectX, rectY, rectWidth, rectHeight, text)
