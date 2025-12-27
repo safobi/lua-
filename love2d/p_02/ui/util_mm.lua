@@ -24,12 +24,12 @@ function util.hovered(button)
 	local mx,my=love.mouse.getX(),love.mouse.getY()
 	if util.position_inside_area({x=mx,y=my},button) then
 		button.isHovered=true
+	elseif not util.position_inside_area({x=mx,y=my},button) then
+		    button.isHovered=false
+	
 	end
 end
 
-function util.hovered_check()
-	
-end
 
 
 function util.draw_text_menu(button,color)
