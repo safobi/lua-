@@ -20,7 +20,7 @@ end
 
 function mm.draw()
 	love.graphics.setFont(mm.font1)
-	for k,v in pairs(elm) do
+	for k,v in ipairs(elm) do
 		util.hovered(elm[k])
 		if  elm[k].isHovered then
 			util.draw_text_menu(elm[k],colors[1])
