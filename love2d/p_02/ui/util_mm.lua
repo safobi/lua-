@@ -12,10 +12,43 @@ function util.position_inside_area(position,button)
 	return (x1<x) and (x<x2) and (y1<y) and (y<y2)
 end
 
-function util.isKey_used(button)
-	local up=love.keypressed("w", w)
-	local down=love.keypressed("s", s)
+function prev_el(elm,menu)
+	local active_idx=1
+	for i,v in ipairs(elm) do
+		if v==menu.active_menu then
+			active_idx=i
+		end
+		if active_idx==1 then
+			menu.active_menu=elm[#elm]
+		else
+			menu.active_menu=elm[active_idx-1]
+		end
+	end
 
+end
+function next_el(elm,menu)
+	local active_idx=1
+	for i,v in ipairs(elm) do
+		if v==menu.active_menu then
+			active_idx=i
+		end
+		if active_idx==#elm then
+			menu.active_menu=elm[1]
+		else
+			menu.active_menu=elm[active_idx+1]
+		end
+	end
+end
+
+function util.isKey_used(elm,menu)
+	local up=love.keyboard.isDown("w")
+	local down=love.keyboard.isDown("s")
+	if up then 
+		prev_el(elm,menu)
+	end
+	if down then
+		next_el(elm,menu)
+	end
 end
 
 function util.drawCenteredText(rectX, rectY, rectWidth, rectHeight, text)

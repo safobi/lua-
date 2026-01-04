@@ -15,13 +15,21 @@ function mm.load()
 	local x,y=love.graphics.getDimensions()
 	mm.w,mm.h=x,y
 	mm.font1= love.graphics.newFont(mm.h/10)
+	mm.active_menu=nil
 
 end
 
 function mm.draw()
 	love.graphics.setFont(mm.font1)
 	for k,v in ipairs(elm) do
+		util.isKey_used(elm,mm)
 		util.hovered(elm[k])
+		if mm.active_menu==elm[k] then
+			util.draw_text_menu(elm[k],colors[1])
+			print( mm.active_menu.name)
+		else
+			  util.draw_text_menu(elm[k],colors[3])
+		end
 		if  elm[k].isHovered then
 			util.draw_text_menu(elm[k],colors[1])
 		else
