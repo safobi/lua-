@@ -18,7 +18,7 @@ function prev_el(elm,menu,idx)
 	else 
 		menu.active_menu=elm[idx-1]
 	end
-	
+
 end
 function next_el(elm,menu)
 	local active_idx=1
@@ -37,6 +37,7 @@ end
 function util.isKey_used(elm,menu)
 	local up=love.keyboard.isDown("w")
 	local down=love.keyboard.isDown("s")
+	local idx=1
 	for i,v in ipairs(elm) do
 	if up then 
 		prev_el(elm,menu,i)
