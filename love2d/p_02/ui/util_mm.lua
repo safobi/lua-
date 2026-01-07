@@ -1,4 +1,5 @@
 local f=require("libs.util")
+local prev_elm=require("ui.elements.mm_prev_element")
 local util={}
 
 function util.position_inside_area(position,button)
@@ -12,19 +13,21 @@ function util.position_inside_area(position,button)
 	return (x1<x) and (x<x2) and (y1<y) and (y<y2)
 end
 
-function prev_el(elm,menu,idx)
-	if menu.active_menu==nil then
-		menu.active_menu=elm[#elm]
-	else 
-		menu.active_menu=elm[idx-1]
-	end
-
+function prev_el(elm,idx)
+	if idx==1 then
+			idx=#elm
+		else 
+			idx=idx-1
+		end
+	return idx
 end
 function next_el(elm,menu)
 	local active_idx=1
 	for i,v in ipairs(elm) do
 		if v==menu.active_menu then
 			active_idx=i
+			print(active_idx)
+			print(menu.active_menu.name)
 		end
 		if active_idx==#elm then
 			menu.active_menu=elm[1]
@@ -37,15 +40,15 @@ end
 function util.isKey_used(elm,menu)
 	local up=love.keyboard.isDown("w")
 	local down=love.keyboard.isDown("s")
-	local idx=1
-	for i,v in ipairs(elm) do
+	local idx=prev_el(elm,1)
 	if up then 
-		prev_el(elm,menu,i)
+		prev_elm(elm,menu)
+		--print(idx)
+		--prev_el(elm,menu)
 	end
 	if down then
 		next_el(elm,menu)
 	end
-end
 end
 
 function util.drawCenteredText(rectX, rectY, rectWidth, rectHeight, text)

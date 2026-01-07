@@ -22,5 +22,6 @@ function love.keypressed(key)
 	if key=="escape" then
 		love.event.quit()
 	end
+	mm.key_used(key)
 
 end
