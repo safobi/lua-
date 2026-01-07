@@ -26,7 +26,6 @@ function mm.key_used(key)
 	if input[key] then
 		input[key](elm,mm)
 	end
-
 print(mm.active_menu.name)
 end
 function mm.draw()
