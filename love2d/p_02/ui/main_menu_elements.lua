@@ -1,4 +1,5 @@
 return function()
+	local settings_mm=require("ui.settings_mm")
 local elements={
 
 	{
@@ -16,7 +17,9 @@ local elements={
 		text="Settings",
 		pos_x=0.2,
 		pos_y=0.55,
-		isHovered=false
+		isHovered=false,
+		input_action=
+		{["return"]=settings_mm}
 	},
 
 	{

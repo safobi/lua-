@@ -27,14 +27,10 @@ function util.hovered(menu,button)
 	if util.position_inside_area({x=mx,y=my},button) then
 		--button.isHovered=true
 		menu.active_element=button
-
 	elseif not util.position_inside_area({x=mx,y=my},button) then
 		    --button.isHovered=false
-		   
-	
 	end
 end
-
 
 
 function util.draw_text_menu(button,color)

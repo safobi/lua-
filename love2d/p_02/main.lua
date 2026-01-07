@@ -19,7 +19,6 @@ function love.update()
 end
 
 function love.keypressed(key)
-	
 	mm.key_used(key)
 
 end
