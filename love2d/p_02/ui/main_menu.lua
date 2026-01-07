@@ -22,11 +22,12 @@ function mm.load()
 end
 
 function mm.key_used(key)
-	if input[key] then
-		
-	end
-	
 
+	if input[key] then
+		input[key](elm,mm)
+	end
+
+print(mm.active_menu.name)
 end
 function mm.draw()
 	love.graphics.setFont(mm.font1)

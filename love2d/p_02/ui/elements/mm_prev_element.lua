@@ -9,6 +9,6 @@ return function (elm,menu)
 		else
 			menu.active_menu=elm[active_idx-1]
 		end
-		print(menu.active_menu.name)
+		--print(menu.active_menu.name)
 	end
 end
