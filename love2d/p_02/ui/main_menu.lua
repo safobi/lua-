@@ -10,33 +10,35 @@ local colors={
 	{1,0.4,0},
 	{0,0.5,0.3}
 }
-mm.active_menu=nil
+mm.active_element=nil
 
 function mm.load()
 	local x,y=love.graphics.getDimensions()
 	mm.w,mm.h=x,y
 	mm.font1= love.graphics.newFont(mm.h/10)
-	mm.active_menu=mm.active_menu or elm[1]
-	mm.input_action=input
-
+	mm.elements=elm()
+	mm.input_action=input()
 end
 
 function mm.key_used(key)
+	local input_act
+	input_act= mm.input_action[key]
+	if not input_act then return end
+	input_act(mm)
+	print(mm.active_element.name)
 
-	if input[key] then
-		input[key](elm,mm)
-	end
-print(mm.active_menu.name)
+	
+	
+
 end
 function mm.draw()
 	love.graphics.setFont(mm.font1)
-	for k,v in ipairs(elm) do
-		--util.isKey_used(elm,mm)
-		util.hovered(elm[k])
-		if  elm[k].isHovered then
-			util.draw_text_menu(elm[k],colors[1])
+	for k,v in ipairs(mm.elements) do
+		util.hovered(mm,mm.elements[k])
+		if   v==mm.active_element then
+			util.draw_text_menu(mm.elements[k],colors[1])
 		else
-		    util.draw_text_menu(elm[k],colors[3])
+		    util.draw_text_menu(mm.elements[k],colors[3])
 		end		
 	end
 end

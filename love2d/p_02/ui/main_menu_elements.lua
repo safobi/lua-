@@ -1,4 +1,4 @@
-
+return function()
 local elements={
 
 	{
@@ -29,7 +29,5 @@ local elements={
 	}
 
 }
-	
-
-
-return elements
+	return elements
+end
