@@ -20,7 +20,6 @@ function mm.load()
 	mm.input_action=input()
 	mm.active_element=nil
 	mm.active_menu=mm.active_menu or mm
-
 end
 
 function mm.key_used(key)
@@ -31,6 +30,17 @@ function mm.key_used(key)
 	if not input_act then return end
 	input_act(menu)
 end
+
+function mm.load_menu()
+	
+
+
+
+
+end
+
+
+
 function mm.draw()
 	love.graphics.setFont(mm.font1)
 	for k,v in ipairs(mm.elements) do
