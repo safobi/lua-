@@ -2,7 +2,7 @@ local mm=require("ui.main_menu")
 
 
 function love.load()
-	mm.load()
+	mm.load_menu()
 	love.window.setMode(960, 510)
 
 

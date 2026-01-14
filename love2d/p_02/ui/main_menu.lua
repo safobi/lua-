@@ -18,8 +18,8 @@ function mm.load()
 	mm.font1= love.graphics.newFont(mm.h/10)
 	mm.elements=elm()
 	mm.input_action=input()
-	mm.active_element=nil
-	mm.active_menu=mm.active_menu or mm
+	
+	 
 end
 
 function mm.key_used(key)
@@ -27,17 +27,16 @@ function mm.key_used(key)
 	if not menu then return end
 	local input_act
 	if menu.active_element and  menu.active_element.input_action then
-		input_act=menu.active_element.input_action[key] end
+		input_act=menu.active_element.input_action[key] 
+	end
 	input_act= menu.input_action[key]
 	if not input_act then return end
 	input_act(menu)
 end
 
-function mm.load_menu()
-
-
-
-
+function mm.load_menu(menu)
+	mm.active_menu=menu or mm
+	mm.active_element=nil
 
 end
 

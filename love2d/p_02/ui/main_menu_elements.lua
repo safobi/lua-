@@ -1,5 +1,6 @@
 return function()
-	local settings_mm=require("ui.settings_mm")
+local settings_mm=require("ui.settings_mm")
+local quit=require("ui.elements.quit_mm")
 local elements={
 
 	{
@@ -27,7 +28,9 @@ local elements={
 		text="Exit",
 		pos_x=0.2,
 		pos_y=0.8,
-		isHovered=false
+		isHovered=false,
+		input_action=
+		{["return"]=quit}
 
 	}
 
