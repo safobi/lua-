@@ -1,5 +1,5 @@
 return function()
-local settings_load=require("ui.settings_mm")
+local settings_load=require("ui.settings.settings_load")
 local quit=require("ui.elements.quit_mm")
 local elements={
 
@@ -20,7 +20,7 @@ local elements={
 		pos_y=0.55,
 		isHovered=false,
 		input_action=
-		{["return"]=settings_mm}
+		{["return"]=settings_load}
 	},
 
 	{

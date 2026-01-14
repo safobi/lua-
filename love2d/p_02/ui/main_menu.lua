@@ -12,7 +12,12 @@ local colors={
 local menus={
 	["main_menu"]={
 		elements=elm(),
-		input_action=input()}
+		input_action=input()},
+	["settings"]={
+
+
+
+	}
 
 }
 local x,y=love.graphics.getDimensions()
@@ -27,7 +32,11 @@ function mm.load(menu_name)
 
 end
 
-function mm.load_mm()
+function mm.load_mm(element,input,name)
+	local menu
+
+
+	return 
 	
 	 
 end
