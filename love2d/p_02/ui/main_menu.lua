@@ -26,13 +26,15 @@ function mm.key_used(key)
 	local menu=mm.active_menu
 	if not menu then return end
 	local input_act
+	if menu.active_element and  menu.active_element.input_action then
+		input_act=menu.active_element.input_action[key] end
 	input_act= menu.input_action[key]
 	if not input_act then return end
 	input_act(menu)
 end
 
 function mm.load_menu()
-	
+
 
 
 
@@ -43,6 +45,7 @@ end
 
 function mm.draw()
 	love.graphics.setFont(mm.font1)
+	
 	for k,v in ipairs(mm.elements) do
 		util.hovered(mm,mm.elements[k])
 		if   v==mm.active_element then
