@@ -1,5 +1,5 @@
 return function()
-local settings_mm=require("ui.settings_mm")
+local settings_load=require("ui.settings_mm")
 local quit=require("ui.elements.quit_mm")
 local elements={
 
