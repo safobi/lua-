@@ -14,6 +14,8 @@ local x,y=love.graphics.getDimensions()
 function mm.load(elements,input)
 	mm.elements=elements()
 	mm.input_action=input()
+	mm.active_menu=menu
+	mm.active_element=nil
 
 end
 
@@ -40,7 +42,7 @@ end
 function mm.load_menu(menu)
 
 	mm.active_menu=menu 
-	mm.active_element=nil
+	
 	if mm.active_menu==mm then 
 		mm.load_mm()
 	end
