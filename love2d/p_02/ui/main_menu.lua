@@ -11,7 +11,7 @@ local colors={
 }
 local menus={
 	["main_menu"]={
-		elements=require("ui.main_menu_elements"),
+		elements=elm(),
 		input_action=input()},
 	["settings"]={elements=require("ui.settings.settings_mm")
 

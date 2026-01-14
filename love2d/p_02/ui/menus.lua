@@ -8,7 +8,7 @@ local menus={
 	["main_menu"]={
 		elements=elm(),
 		input_action=input()},
-	["settings"]={elements=require("ui.settings.settings_mm")
+	["settings"]={elements=require("ui.settings.settings_mm")}
 
 }
 
