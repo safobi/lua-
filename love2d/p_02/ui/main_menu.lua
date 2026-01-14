@@ -11,9 +11,9 @@ local colors={
 }
 local menus={
 	["main_menu"]={
-		elements=elm(),
+		elements=require("ui.main_menu_elements"),
 		input_action=input()},
-	["settings"]={
+	["settings"]={elements=require("ui.settings.settings_mm")
 
 
 
@@ -32,14 +32,7 @@ function mm.load(menu_name)
 
 end
 
-function mm.load_mm(element,input,name)
-	local menu
 
-
-	return 
-	
-	 
-end
 
 function mm.key_used(key)
 	local menu=mm.active_menu

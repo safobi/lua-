@@ -40,5 +40,13 @@ function util.draw_text_menu(button,color)
 	local textHeight = font:getHeight()
 	love.graphics.print({color,button.text}, button.pos_x*win_x, button.pos_y*win_y, 0, 1, 1, textWidth/2, textHeight/2)
 end
+function util.load_mm(element,input)
+	local menu={}
+	local elm_r=require("element")
+	local input_r=require("input")
+		menu.elements=elm_r()
+		menu.input_action=input_r()
+	return 	menu
+end
 
 return util
