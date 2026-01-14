@@ -1,8 +1,8 @@
 local mm=require("ui.main_menu")
-
-
+local elm=require("ui.main_menu_elements")
+local input=require("ui.input_data")
 function love.load()
-	mm.load_menu()
+	mm.load(elm,input)
 	love.window.setMode(960, 510)
 
 

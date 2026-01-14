@@ -1,21 +1,24 @@
 local mm={}
-local elm=require("ui.main_menu_elements")
 local util=require("ui.util_mm")
 local f=require("libs.util")
-local input=require("ui.input_data")
 local colors={
 	{0.1, 0.5, 0.3},
 	{0.2,0.6,0.9},
 	{1,0.4,0},
 	{0,0.5,0.3}
 }
-
-
-
-function mm.load()
-	local x,y=love.graphics.getDimensions()
+local x,y=love.graphics.getDimensions()
 	mm.w,mm.h=x,y
 	mm.font1= love.graphics.newFont(mm.h/10)
+
+function mm.load(elements,input)
+	mm.elements=elements()
+	mm.input_action=input()
+
+end
+
+function mm.load_mm()
+	
 	mm.elements=elm()
 	mm.input_action=input()
 	
@@ -35,8 +38,12 @@ function mm.key_used(key)
 end
 
 function mm.load_menu(menu)
-	mm.active_menu=menu or mm
+
+	mm.active_menu=menu 
 	mm.active_element=nil
+	if mm.active_menu==mm then 
+		mm.load_mm()
+	end
 
 end
 
