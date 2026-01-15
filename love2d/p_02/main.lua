@@ -21,6 +21,7 @@ function love.keypressed(key)
 	mm.key_used(key)
 end
 
-function love.mousepressed(x, y, button, istouch, presses)
-	
+function love.mousepressed()
+	mm.mouse_used()
+
 end
