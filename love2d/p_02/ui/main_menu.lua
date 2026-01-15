@@ -33,10 +33,16 @@ function mm.key_used(key)
 	if not input_act then return end
 	input_act(menu)
 end
-function mm.mouse_used(button)
+function mm.mouse_used()
 	local menu=mm.active_menu
 	if not menu then return end
 	local mouse_act=love.mouse.isDown(1)
+	if menu.active_element and mouse_act then
+
+
+		
+	end
+
 end
 
 
