@@ -51,7 +51,7 @@ function mm.draw()
 	for k,v in ipairs(menu.elements) do
 		util.hovered(menu,menu.elements[k])
 		if   v==menu.active_element then
-			if menu.active_element.is_colored then return end
+			if menu.active_element.is_colored then util.draw_text_menu(menu.elements[k],colors[3]) return end
 			util.draw_text_menu(menu.elements[k],colors[1])
 		else
 		    util.draw_text_menu(menu.elements[k],colors[3])
