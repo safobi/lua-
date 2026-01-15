@@ -1,37 +1,25 @@
 local mm={}
 local util=require("ui.util_mm")
 local f=require("libs.util")
-local elm=require("ui.main_menu_elements")
-local input=require("ui.input_data")
+local menus=require("ui.menus")
 local colors={
 	{0.1, 0.5, 0.3},
 	{0.2,0.6,0.9},
 	{1,0.4,0},
 	{0,0.5,0.3}
 }
-local menus={
-	["main_menu"]={
-		elements=elm(),
-		input_action=input()},
-	["settings"]={elements=require("ui.settings.settings_mm")
 
-
-
-	}
-
-}
 local x,y=love.graphics.getDimensions()
 	mm.w,mm.h=x,y
 	mm.font1= love.graphics.newFont(mm.h/10)
 	mm.active_menu=nil
 
 function mm.load(menu_name)
-	local menu=menus[menu_name]
+	local menu=menus(menu_name)
 	mm.active_menu=menu
 	mm.active_element=nil
 
 end
-
 
 
 function mm.key_used(key)
