@@ -6,7 +6,7 @@ return function()
 		text="Resolution",
 		pos_x=0.2,
 		pos_y=0.3,
-		isHovered=false
+		is_colored=true
 		
 	},
 
