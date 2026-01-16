@@ -24,6 +24,7 @@ end
 
 function util.hovered(menu,button)
 	local mx,my=love.mouse.getX(),love.mouse.getY()
+	if button.no_active_usage then return end
 	if util.position_inside_area({x=mx,y=my},button) then
 		--button.isHovered=true
 		menu.active_element=button
@@ -40,6 +41,7 @@ function util.draw_text_menu(button,color)
 	local textHeight = font:getHeight()
 	love.graphics.print({color,button.text}, button.pos_x*win_x, button.pos_y*win_y, 0, 1, 1, textWidth/2, textHeight/2)
 end
+--not used
 function util.load_mm(element,input)
 	local menu={}
 	local elm_r=require("element")

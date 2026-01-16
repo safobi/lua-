@@ -1,7 +1,7 @@
 local mm_vars={
 
-	hovered_button,
-	active_menu
+	resolution={w=910,h=510},
+	font_size_text
 
 
 }

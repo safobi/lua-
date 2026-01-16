@@ -2,6 +2,7 @@ local f=require("libs.util")
 local elm_mm=require("ui.main_menu_elements")
 local input_mm=require("ui.input_data")
 local elm_set=require("ui.settings.settings_mm")
+local input_set=require("ui.settings.settings_input")
 
 return function(name)
 
@@ -11,7 +12,9 @@ local menus={
 		elements=elm_mm(),
 		input_action=input_mm()},
 	["settings"]={
-		elements=elm_set()}
+		elements=elm_set(),
+		input_action=input_set()
+	}
 
 }
 
