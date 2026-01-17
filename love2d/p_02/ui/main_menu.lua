@@ -38,8 +38,9 @@ function mm.mouse_used()
 	local menu=mm.active_menu
 	if not menu then return end
 	if not menu.active_element.input_action then return end
+	local mx,my=love.mouse.getX(),love.mouse.getY()
 	local mouse_act=love.mouse.isDown(1)
-	if menu.active_element and mouse_act then
+	if util.position_inside_area({x=mx,y=my},menu.active_element) and mouse_act then
 		menu.active_element.input_action["return"]()
 	end
 end
