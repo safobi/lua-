@@ -1,6 +1,6 @@
 return function (menu)
 	local active_idx=1
-	if menu.elements.no_active_usage then return end
+	
 	for i,v in ipairs(menu.elements) do
 
 		if v==menu.active_element then
