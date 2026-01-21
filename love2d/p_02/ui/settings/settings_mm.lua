@@ -18,7 +18,7 @@ return function()
 		text="Apply",
 		pos_x=0.7,
 		pos_y=0.8,
-		
+		no_active_usage=true
 		
 	},
 	{
