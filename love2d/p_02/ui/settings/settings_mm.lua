@@ -4,6 +4,7 @@ return function()
 	local loader=require("ui.settings.settings_res_loader")
 	local settings_graph=require("ui.settings.settings_graphics")
 	local window=require("ui.settings.setting_window")
+	local canv=require("ui.settings.canvas_load")
 	local elements={
 
 	{
@@ -11,9 +12,10 @@ return function()
 		text="Graphics",
 		pos_x=0.2,
 		pos_y=0.3,
+		canvas=settings_graph(),
 		no_active_usage=true,
 		input_action=
-		{["return"]=window.draw_canvas(settings_graph())}
+		{["return"]=c}
 	},
 	{
 		name="b_sound",

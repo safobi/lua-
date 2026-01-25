@@ -47,10 +47,11 @@ function mm.mouse_used()
 	end
 end
 
-function mm.draw_add()
+function mm.draw_cnv()
 	local menu=mm.active_menu
-
-
+	if menu.canvas then 
+		win.draw_canvas(canvas)
+	end
 
 end
 
@@ -65,6 +66,10 @@ function mm.draw()
 		    util.draw_text_menu(menu.elements[k],colors[3])
 		end		
 
+	end
+	if  menu.active_element and menu.active_element.canvas then 
+		print(canvas)
+		win.draw_canvas(canvas)
 	end
 	
 

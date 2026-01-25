@@ -15,7 +15,7 @@ function win.load(window)
 		for i,v in ipairs(window) do
 			love.graphics.print(window[i].text)
 			love.graphics.print("window[i].text")
-
+			print(1)
 		end
 
 	end
@@ -29,7 +29,7 @@ end
 function win.draw_canvas(window)
 
 	win.load(window)
-	win.draw_c()
+	win.draw_C()
 
 end
 
