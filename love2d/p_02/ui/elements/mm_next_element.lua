@@ -8,7 +8,6 @@ return function (menu)
 		end
 	end
 
-
 	if active_idx==#menu.elements then
 
 		menu.active_element=menu.elements[1]

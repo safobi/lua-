@@ -1,8 +1,9 @@
 return function()
-	local vars=require("ui.mm_vars")
+	
 	local back=require("ui.elements.mm_load_mm")
 	local loader=require("ui.settings.settings_res_loader")
 	local settings_graph=require("ui.settings.settings_graphics")
+	local window=require("ui.settings.setting_window")
 	local elements={
 
 	{
@@ -12,9 +13,7 @@ return function()
 		pos_y=0.3,
 		no_active_usage=true,
 		input_action=
-		{["return"]=settings_graph}
-	}
-		
+		{["return"]=window.load(settings_graph)}
 	},
 	{
 		name="b_sound",

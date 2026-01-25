@@ -1,7 +1,9 @@
 local util=require("ui.util_mm")
+local vars=require("ui.mm_vars")
 
+local set={
 
-{
+	{
 		name="b_res_display",
 		text=vars.resolution.w.."x"..vars.resolution.h,
 		pos_x=0.7,
@@ -9,4 +11,6 @@ local util=require("ui.util_mm")
 		input_action=
 		{["return"]=loader
 		}
+	}
 }
+return set
