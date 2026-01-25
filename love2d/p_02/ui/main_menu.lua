@@ -68,6 +68,8 @@ function mm.draw()
 		end		
 
 	end
+	
+	
 	--if  menu.active_element and menu.active_element.canvas then 
 	--	win.draw_canvas(menu.active_element.canvas)
 	--end

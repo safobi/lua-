@@ -13,8 +13,9 @@ return function()
 		pos_x=0.2,
 		pos_y=0.3,
 		no_active_usage=true,
-		--input_action=
-		--{["return"]=canv(settings_graph())}
+		canvas=love.graphics.newCanvas(),
+		input_action=
+		{["return"]=canv(settings_graph())}
 	},
 	{
 		name="b_sound",
