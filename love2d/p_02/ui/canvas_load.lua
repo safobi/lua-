@@ -8,6 +8,6 @@ return function(canvas,window,color)
 		end
 		)
 
-		return canvas
+		love.graphics.draw(canvas,0,0)
 
 end
