@@ -12,10 +12,9 @@ return function()
 		text="Graphics",
 		pos_x=0.2,
 		pos_y=0.3,
-		canvas=settings_graph(),
 		no_active_usage=true,
-		input_action=
-		{["return"]=c}
+		--input_action=
+		--{["return"]=canv(settings_graph())}
 	},
 	{
 		name="b_sound",

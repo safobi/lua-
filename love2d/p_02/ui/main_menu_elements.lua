@@ -19,6 +19,7 @@ local elements={
 		pos_x=0.2,
 		pos_y=0.55,
 		isHovered=false,
+		canvas=love.graphics.newCanvas(),
 		input_action=
 		{["return"]=settings_load}
 	},

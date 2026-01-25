@@ -8,7 +8,10 @@ local colors={
 	{0,0.5,0.3}
 }
 
+function win.draw_cnv(window)
 
+	
+end
 function win.load_c(window)
 	win.canvas=love.graphics.newCanvas()
 	win.canvas:renderTo(function()
