@@ -13,9 +13,7 @@ function win.load(window)
 	win.canvas=love.graphics.newCanvas()
 	win.canvas:renderTo(function()
 		for i,v in ipairs(window) do
-			love.graphics.print(window[i].text)
-			love.graphics.print("window[i].text")
-			print(1)
+			util.draw_text_menu(window[i],colors[4])
 		end
 
 	end

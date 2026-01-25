@@ -69,7 +69,7 @@ function mm.draw()
 	end
 	if  menu.active_element and menu.active_element.canvas then 
 		print(canvas)
-		win.draw_canvas(canvas)
+		win.draw_canvas(menu.active_element.canvas)
 	end
 	
 
