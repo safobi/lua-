@@ -11,18 +11,20 @@ local colors={
 
 function win.load(window)
 	win.canvas=love.graphics.newCanvas(vars.resolution.w*0.6, vars.resolution.h*0.6)
+	
+end
+
+function win.draw(window)
 	love.graphics.setCanvas(win.canvas)
 		for i,v in ipairs(window) do
 			util.draw_text_menu(window[i],colors[4])
 		end
 	love.graphics.setCanvas()
+	love.graphics.draw(win.canvas)
 end
-function win.draw()
-	local window=win.active_window
-	for i,v in ipairs(window) do
-		print(v)
-		util.draw_text_menu(window[i],colors[4])
-	end
+function win.draw_canvas(window)
+	win.load(window)
+	win.draw(window)
 
 end
 

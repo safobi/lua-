@@ -63,6 +63,8 @@ function mm.draw()
 		    util.draw_text_menu(menu.elements[k],colors[3])
 		end		
 	end
+
+	
 end
 
 
