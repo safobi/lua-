@@ -2,6 +2,8 @@ local mm={}
 local util=require("ui.util_mm")
 local f=require("libs.util")
 local menus=require("ui.menus")
+local win=require("ui.settings.setting_window")
+local settings_graph=require("ui.settings.settings_graphics")
 local colors={
 	{0.1, 0.5, 0.3},
 	{0.2,0.6,0.9},
@@ -62,9 +64,10 @@ function mm.draw()
 		else
 		    util.draw_text_menu(menu.elements[k],colors[3])
 		end		
+
 	end
 
-	
+
 end
 
 

@@ -23,7 +23,7 @@ end
 
 function util.hovered(menu,button)
 	local mx,my=love.mouse.getX(),love.mouse.getY()
-	if button.no_active_usage then return end
+	--if button.no_active_usage then return end
 	local mouse_act=love.mouse.isDown(1)
 	if util.position_inside_area({x=mx,y=my},button) then
 		--button.isHovered=true
