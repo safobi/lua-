@@ -2,6 +2,7 @@ return function()
 	local vars=require("ui.mm_vars")
 	local back=require("ui.elements.mm_load_mm")
 	local loader=require("ui.settings.settings_res_loader")
+	local settings_graph=require("ui.settings.settings_graphics")
 	local elements={
 
 	{
@@ -9,7 +10,10 @@ return function()
 		text="Graphics",
 		pos_x=0.2,
 		pos_y=0.3,
-		no_active_usage=true
+		no_active_usage=true,
+		input_action=
+		{["return"]=settings_graph}
+	}
 		
 	},
 	{
