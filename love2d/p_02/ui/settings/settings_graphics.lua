@@ -1,5 +1,6 @@
 local util=require("ui.util_mm")
 local vars=require("ui.mm_vars")
+return function()
 
 local set={
 
@@ -14,3 +15,4 @@ local set={
 	}
 }
 return set
+end

@@ -13,7 +13,7 @@ return function()
 		pos_y=0.3,
 		no_active_usage=true,
 		input_action=
-		{["return"]=window.draw_canvas(settings_graph)}
+		{["return"]=window.draw_canvas(settings_graph())}
 	},
 	{
 		name="b_sound",
