@@ -3,7 +3,7 @@ local util=require("ui.util_mm")
 local f=require("libs.util")
 local menus=require("ui.menus")
 local win=require("ui.settings.setting_window")
-local settings_graph=require("ui.settings.settings_graphics")
+local cnv_l=require("")
 local colors={
 	{0.1, 0.5, 0.3},
 	{0.2,0.6,0.9},
@@ -68,8 +68,9 @@ function mm.draw()
 		end		
 
 	end
-	
-	
+	if menu.active_canvas then
+
+
 	--if  menu.active_element and menu.active_element.canvas then 
 	--	win.draw_canvas(menu.active_element.canvas)
 	--end

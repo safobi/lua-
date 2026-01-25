@@ -13,6 +13,7 @@ return function()
 		pos_x=0.2,
 		pos_y=0.3,
 		canvas=love.graphics.newCanvas(),
+		elements=settings_graph(),
 		input_action=
 		{["return"]=graph_canv}
 	},
