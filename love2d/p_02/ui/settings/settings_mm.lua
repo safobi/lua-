@@ -5,8 +5,16 @@ return function()
 	local elements={
 
 	{
-		name="b_resolution",
-		text="Resolution",
+		name="b_graphics",
+		text="Graphics",
+		pos_x=0.2,
+		pos_y=0.3,
+		no_active_usage=true
+		
+	},
+	{
+		name="b_sound",
+		text="Sound",
 		pos_x=0.2,
 		pos_y=0.3,
 		no_active_usage=true
@@ -18,7 +26,7 @@ return function()
 		text="Apply",
 		pos_x=0.7,
 		pos_y=0.8,
-		no_active_usage=true
+		
 		
 	},
 	{
