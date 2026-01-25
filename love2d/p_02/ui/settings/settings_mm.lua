@@ -4,7 +4,7 @@ return function()
 	local loader=require("ui.settings.settings_res_loader")
 	local settings_graph=require("ui.settings.settings_graphics")
 	local window=require("ui.settings.setting_window")
-	local canv=require("ui.settings.canvas_load")
+	local canv=require("ui.canvas_load")
 	local elements={
 
 	{

@@ -9,11 +9,11 @@ local colors={
 }
 
 
-function win.load(window)
+function win.load_c(window)
 	win.canvas=love.graphics.newCanvas()
 	win.canvas:renderTo(function()
 		for i,v in ipairs(window) do
-			util.draw_text_menu(window[i],colors[4])
+			util.draw_text_menu(window[i],colors[2])
 		end
 
 	end
@@ -26,7 +26,7 @@ end
 
 function win.draw_canvas(window)
 
-	win.load(window)
+	win.load_c(window)
 	win.draw_C()
 
 end
