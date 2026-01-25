@@ -16,7 +16,7 @@ return function()
 		name="b_sound",
 		text="Sound",
 		pos_x=0.2,
-		pos_y=0.3,
+		pos_y=0.5,
 		no_active_usage=true
 		
 	},
