@@ -70,7 +70,6 @@ function mm.draw()
 	end
 	if menu.active_canvas then
 		cnv_l(menu.active_canvas.canvas,menu.active_canvas.window,colors[2])
-
 	end
 
 
