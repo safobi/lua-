@@ -28,7 +28,9 @@ function mm.key_used(key)
 	local menu=mm.active_menu
 	if not menu then return end
 	local input_act
+
 	if menu.active_element and  menu.active_element.input_action then
+		
 		input_act=menu.active_element.input_action[key] 
 	end
 	if menu.active_canvas and  menu.active_canvas.window.input_action then
