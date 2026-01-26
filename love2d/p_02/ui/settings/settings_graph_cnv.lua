@@ -1,7 +1,8 @@
-
-local mm=require("ui.main_menu")
-
+local canv=require("ui.canvas_load")
 return function()
-	
-	mm.expand_flag()
+	local settings_graph=require("ui.settings.settings_graphics")
+	local mm=require("ui.main_menu")
+	local menu=mm.active_menu
+	menu.active_element.expanded=true
+
 end

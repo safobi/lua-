@@ -50,12 +50,6 @@ function mm.mouse_used()
 end
 
 
-function mm.expand_flag()
-	local menu=mm.active_element
-	menu.expanded=true
-
-end
-
 function mm.draw()
 	local menu=mm.active_menu
 	love.graphics.setFont(mm.font1)
@@ -63,21 +57,14 @@ function mm.draw()
 		util.hovered(menu,menu.elements[k])
 		if   v==menu.active_element then
 			util.draw_text_menu(menu.elements[k],colors[1])
+			
 		else
 		    util.draw_text_menu(menu.elements[k],colors[3])
 		end		
 
+	
 	end
-	if menu.active_canvas then
-		cnv_l(menu.active_canvas.canvas,function()
-			for i,v in ipairs(menu.active_canvas.window) do
-				util.draw_text_menu(menu.active_canvas.window[i],colors[1])
-			end
-
-
-	end)
-	end
-
+	
 
 	--if  menu.active_element and menu.active_element.canvas then 
 	--	win.draw_canvas(menu.active_element.canvas)
