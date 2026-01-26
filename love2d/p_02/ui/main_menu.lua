@@ -57,7 +57,9 @@ function mm.draw()
 		util.hovered(menu,menu.elements[k])
 		if   v==menu.active_element then
 			util.draw_text_menu(menu.elements[k],colors[1])
-			
+			if v.expanded then
+				util.draw_text_menu(v.elements[k],colors[4])
+			 end
 		else
 		    util.draw_text_menu(menu.elements[k],colors[3])
 		end		
