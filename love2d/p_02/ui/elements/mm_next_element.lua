@@ -1,34 +1,31 @@
-return function (menu)
-	local active_idx=1
-	local no_active_idx=1
-	for i,v in ipairs(menu.elements) do
-		if v.no_active_usage then 
-				no_active_idx=i
-				--print(no_active_idx)
-		end
-		if v==menu.active_element then
-			active_idx=i
-		
-		end
-	
+return function(menu)
+    if not menu.elements or #menu.elements == 0 then return end
+
+    local count = #menu.elements
+    local active_idx = 1
+    if menu.active_element and menu.active_element.no_active_usage then
+   		 menu.active_element = nil
 	end
-	
-	--if menu.active_element and menu.active_element.no_active_usage then goto continue end
-	if  menu.elements[no_active_idx] then 
-		menu.active_element=menu.elements[no_active_idx+1]
-		print(active_idx)
-	elseif active_idx==#menu.elements then
-	
-		menu.active_element=menu.elements[1]
-	
-	else
 
-		menu.active_element=menu.elements[active_idx+1]
+    -- find current active index
+    for i, v in ipairs(menu.elements) do
+        if v == menu.active_element then
+            active_idx = i
+            break
+        end
+    end
 
-	end
-	--if menu.active_element then print(menu.active_element.name) end
-	::continue::
-	
-	
+    -- try next elements until a valid one is found
+    for _ = 1, count do
+        active_idx = active_idx % count + 1
+        local el = menu.elements[active_idx]
 
+        if not el.no_active_usage then
+            menu.active_element = el
+            return
+        end
+    end
+
+    -- fallback: no valid elements found
+    menu.active_element = nil
 end

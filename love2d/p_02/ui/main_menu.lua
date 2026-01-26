@@ -33,9 +33,6 @@ function mm.key_used(key)
 		
 		input_act=menu.active_element.input_action[key] 
 	end
-	if menu.active_canvas and  menu.active_canvas.window.input_action then
-		input_act=menu.active_canvas.window.input_action[key] 
-	end
 	input_act=input_act or menu.input_action[key]
 	if not input_act then return end
 	input_act(menu)
@@ -52,12 +49,10 @@ function mm.mouse_used()
 	end
 end
 
-function mm.draw_cnv()
-	local menu=mm.active_menu
 
-	if menu.canvas then 
-		win.draw_canvas(canvas)
-	end
+function mm.expand_flag()
+	local menu=mm.active_element
+	menu.expanded=true
 
 end
 

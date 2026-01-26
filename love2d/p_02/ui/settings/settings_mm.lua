@@ -12,7 +12,6 @@ return function()
 		text="Graphics",
 		pos_x=0.2,
 		pos_y=0.3,
-		canvas=love.graphics.newCanvas(),
 		elements=settings_graph(),
 		input_action=
 		{["return"]=graph_canv}
@@ -31,7 +30,8 @@ return function()
 		text="Apply",
 		pos_x=0.7,
 		pos_y=0.8,
-		no_active_usage=true
+		no_active_usage=true,
+
 		
 		
 	},
@@ -40,6 +40,7 @@ return function()
 		text="Back",
 		pos_x=0.2,
 		pos_y=0.8,
+
 		input_action=
 		{["return"]=back}
 	},
