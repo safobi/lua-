@@ -10,8 +10,8 @@ local colors={
 
 
 
-function win.draw_cnv(window)
-	local menu=menu.active_menu
+function win.mouse_in_canvas()
+	
 	
 
 

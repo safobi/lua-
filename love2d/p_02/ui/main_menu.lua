@@ -31,6 +31,9 @@ function mm.key_used(key)
 	if menu.active_element and  menu.active_element.input_action then
 		input_act=menu.active_element.input_action[key] 
 	end
+	if menu.active_canvas and  menu.active_canvas.window.input_action then
+		input_act=menu.active_canvas.window.input_action[key] 
+	end
 	input_act=input_act or menu.input_action[key]
 	if not input_act then return end
 	input_act(menu)
@@ -69,7 +72,13 @@ function mm.draw()
 
 	end
 	if menu.active_canvas then
-		cnv_l(menu.active_canvas.canvas,menu.active_canvas.window,colors[2])
+		cnv_l(menu.active_canvas.canvas,function()
+			for i,v in ipairs(menu.active_canvas.window) do
+				util.draw_text_menu(menu.active_canvas.window[i],colors[1])
+			end
+
+
+	end)
 	end
 
 

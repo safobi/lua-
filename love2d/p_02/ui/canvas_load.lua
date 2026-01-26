@@ -1,13 +1,8 @@
 local util=require("ui.util_mm")
-return function(canvas,window,color)
+return function(canvas,func)
 		canvas:renderTo(function()
-			for i,v in ipairs(window) do
-				util.draw_text_menu(window[i],color)
-			end
-
+			func()
 		end
 		)
-
 		love.graphics.draw(canvas,0,0)
-
 end
