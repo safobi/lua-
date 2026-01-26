@@ -14,7 +14,8 @@ return function()
 		pos_y=0.3,
 		elements=settings_graph(),
 		input_action=
-		{["return"]=graph_canv}
+		{["return"]=graph_canv,
+		escape=graph_canv}
 	},
 	{
 		name="b_sound",

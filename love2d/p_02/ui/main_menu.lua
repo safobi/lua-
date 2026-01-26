@@ -49,16 +49,22 @@ function mm.mouse_used()
 	end
 end
 
-
+function draw_c(elm, color)
+	for i,v in ipairs(elm) do
+		util.draw_text_menu(elm[i],color)
+	end
+end
 function mm.draw()
 	local menu=mm.active_menu
 	love.graphics.setFont(mm.font1)
 	for k,v in ipairs(menu.elements) do
+		if  menu.active_element and menu.active_element.stays_active then goto continue end
 		util.hovered(menu,menu.elements[k])
+		::continue::
 		if   v==menu.active_element then
 			util.draw_text_menu(menu.elements[k],colors[1])
 			if v.expanded then
-				util.draw_text_menu(v.elements[k],colors[4])
+				draw_c(v.elements,colors[2])
 			 end
 		else
 		    util.draw_text_menu(menu.elements[k],colors[3])
